@@ -1,0 +1,283 @@
+.product-page {
+  background: #f7f7f5;
+  min-height: 100vh;
+  padding: 36px 20px 70px;
+}
+
+.product-wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.product-breadcrumb {
+  font-size: 13px;
+  color: #6f6f6f;
+  margin-bottom: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.product-breadcrumb .sep {
+  color: #a0a0a0;
+}
+
+.product-main {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 54px;
+  align-items: start;
+}
+
+.product-gallery {
+  width: 100%;
+}
+
+.main-image-card {
+  background: #f1f3ee;
+  border: 1px solid #e7e7e2;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px;
+}
+
+.main-image-card img {
+  width: 100%;
+  max-width: 520px;
+  max-height: 560px;
+  object-fit: contain;
+  display: block;
+}
+
+.product-info {
+  padding-top: 8px;
+}
+
+.product-brand {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: #7a7a7a;
+  margin-bottom: 14px;
+}
+
+.product-title {
+  font-size: 48px;
+  line-height: 1.05;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 14px;
+}
+
+.product-subtitle {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 26px;
+}
+
+.price-box {
+  margin-bottom: 24px;
+}
+
+.current-price {
+  font-size: 38px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 10px;
+}
+
+.transfer-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #9aaa63;
+  margin: 0;
+}
+
+.transfer-price span {
+  font-size: 20px;
+  font-weight: 500;
+  color: #222;
+}
+
+.benefits-box {
+  border-top: 1px solid #e5e5e0;
+  border-bottom: 1px solid #e5e5e0;
+  padding: 18px 0;
+  margin-bottom: 24px;
+}
+
+.benefits-box p {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.benefits-box p:last-child {
+  margin-bottom: 0;
+}
+
+.sin-stock {
+  color: #b42318 !important;
+  font-weight: 600;
+}
+
+.variant-box {
+  margin-bottom: 24px;
+}
+
+.variant-label {
+  display: block;
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.variant-chip {
+  border: 1px solid #222;
+  background: white;
+  padding: 12px 18px;
+  font-size: 15px;
+  cursor: default;
+}
+
+.purchase-box {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  margin-bottom: 28px;
+}
+
+.quantity-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cfcfc8;
+  background: white;
+  height: 56px;
+}
+
+.quantity-box button {
+  width: 52px;
+  height: 54px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  color: #222;
+  cursor: pointer;
+}
+
+.quantity-box span {
+  min-width: 54px;
+  text-align: center;
+  font-size: 20px;
+  color: #111;
+}
+
+.btn-add-cart {
+  flex: 1;
+  border: none;
+  background: #9aaa63;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0 28px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-add-cart:hover:not(:disabled) {
+  background: #889954;
+}
+
+.btn-add-cart:disabled {
+  background: #c8ccb9;
+  cursor: not-allowed;
+}
+
+.product-description {
+  margin-top: 56px;
+}
+
+.product-description h2 {
+  font-size: 28px;
+  color: #111;
+  margin-bottom: 18px;
+}
+
+.description-card {
+  background: white;
+  border: 1px solid #e6e6e0;
+  padding: 28px;
+  max-width: 900px;
+}
+
+.description-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 14px;
+}
+
+.description-card p:last-child {
+  margin-bottom: 0;
+}
+
+.description-text {
+  margin-top: 18px !important;
+}
+
+@media (max-width: 1024px) {
+  .product-main {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .product-title {
+    font-size: 38px;
+  }
+
+  .main-image-card {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 680px) {
+  .product-page {
+    padding: 22px 14px 50px;
+  }
+
+  .product-title {
+    font-size: 31px;
+  }
+
+  .current-price {
+    font-size: 30px;
+  }
+
+  .transfer-price {
+    font-size: 21px;
+  }
+
+  .transfer-price span {
+    font-size: 17px;
+  }
+
+  .purchase-box {
+    flex-direction: column;
+  }
+
+  .quantity-box,
+  .btn-add-cart {
+    width: 100%;
+  }
+
+  .main-image-card {
+    min-height: 340px;
+    padding: 20px;
+  }
+
+  .description-card {
+    padding: 20px;
+  }
+}

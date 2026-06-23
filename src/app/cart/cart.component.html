@@ -1,0 +1,46 @@
+<div class="cart-wrapper">
+  <button class="cart-button" type="button" (click)="toggleCart()">
+    <span class="cart-icon">🛒</span>
+    <span class="cart-badge" *ngIf="getTotalItems() > 0">
+      {{ getTotalItems() }}
+    </span>
+  </button>
+
+  <div class="cart-dropdown" *ngIf="isOpen">
+    <div class="cart-header">
+      <h3>Carrito</h3>
+      <button class="close-btn" type="button" (click)="closeCart()">×</button>
+    </div>
+
+    <div class="cart-body" *ngIf="(cartList$ | async) as cartItems">
+      <div *ngIf="cartItems.length === 0" class="empty-cart">
+        Tu carrito está vacío
+      </div>
+
+      <div class="cart-item" *ngFor="let suplemento of cartItems">
+        <div class="cart-item-info">
+          <h4>{{ suplemento.name }}</h4>
+          <p>{{ suplemento.quantity }} x {{ suplemento.price | currency:'ARS':'symbol':'1.0-0' }}</p>
+        </div>
+
+        <button
+          class="remove-btn"
+          type="button"
+          (click)="removeItem(suplemento.id)">
+          Eliminar
+        </button>
+      </div>
+
+      <div class="cart-footer" *ngIf="cartItems.length > 0">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong>{{ getTotalPrice() | currency:'ARS':'symbol':'1.0-0' }}</strong>
+        </div>
+
+        <button class="checkout-btn" type="button">
+          Finalizar compra
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

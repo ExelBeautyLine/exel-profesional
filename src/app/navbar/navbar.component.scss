@@ -1,0 +1,35 @@
+.navbar {
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.top-bar {
+  background: #3d5f54;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.nav-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.icons {
+  font-size: 20px;
+}

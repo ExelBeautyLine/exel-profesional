@@ -1,0 +1,12 @@
+<div class="input-group">
+    <div class="input-group-prepend">
+        <button class="btn btn-success" (click)="downQuantity()">-</button>
+    </div>
+    
+    <input class="" type="text" [(ngModel)]="quantity" (keyup)="onChangeQuantity($event) ">
+  
+    <div class="input-group-prepend" > 
+        <button class="btn btn-success" (click)="upQuantity()">+</button>
+    </div>
+
+</div>
