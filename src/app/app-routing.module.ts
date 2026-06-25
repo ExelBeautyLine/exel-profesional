@@ -1,29 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SuplementosSuplementoComponent } from './suplementos-suplemento/suplementos-suplemento.component';
-import { SuplementosAboutComponent } from './suplementos-about/suplementos-about.component';
-import { ListarSuplementoComponent } from './listar-suplemento/listar-suplemento.component';
+import { ProductosListaComponent } from './productos-listar/productos-listar.component';
 
 const routes: Routes = [
     {
-      path:'',
-      redirectTo:'suplementos',
+      path: '',
+      redirectTo: 'productos',
       pathMatch: 'full'
     },
     {
-      path: 'suplementos',
-      component: SuplementosSuplementoComponent
+      path: 'productos',
+      component: ProductosListaComponent
+    },
+    {
+    path: 'productos/subcategoria/:slug',
+    component: ProductosListaComponent
     },
 
-    {
-      path: 'about',
-      component: SuplementosAboutComponent
-    },
-    
-    {
-      path: 'suplementos/:id',
-      component: ListarSuplementoComponent
-    }
 
 ];
 

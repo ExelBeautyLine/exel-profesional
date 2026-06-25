@@ -6,3 +6,9 @@ footer{
     height: 60px;
     line-height: 60px;
 }
+
+// Agregá solo esto:
+:host {
+  display: block;
+  overflow-x: hidden;
+}

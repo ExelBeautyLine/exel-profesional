@@ -1,20 +1,59 @@
-<header class="navbar">
-  <div class="top-bar">
-    ENVÍOS GRATIS A PARTIR DE $100.000
-  </div>
+<div class="navbar">
 
-  <div class="nav-main">
-    <div class="logo">SUPLEMENTOS-JO</div>
+  <div class="navbar-top">
 
-    <nav>
-      <a routerLink="/suplementos">Shop</a>
-      <a>Rutinas</a>
-      <a>Suplementos</a>
-      <a>Contacto</a>
-    </nav>
+    <button class="hamburger" (click)="menuOpen = !menuOpen">
+      ☰
+    </button>
+
+    <div class="logo">
+      EXEL PROFESSIONAL LINE
+    </div>
 
     <div class="icons">
-      <app-cart></app-cart>
+      <i class="fa-regular fa-user"></i>
+      <i class="fa-solid fa-bag-shopping"></i>
     </div>
+
   </div>
-</header>
+
+  <nav class="navbar-menu" [class.open]="menuOpen">
+
+    <ul>
+      
+      <li>
+        <a [routerLink]="['/productos']">Inicio</a>
+      </li>
+
+
+      <li *ngFor="let categoria of menu"
+          (mouseenter)="categoria.open = true"
+          (mouseleave)="categoria.open = false">
+
+        <a>{{ categoria.nombre }}</a>
+
+        <ul class="submenu" [class.submenu--visible]="categoria.open"
+            *ngIf="categoria.subcategorias?.length">
+
+          <li *ngFor="let sub of categoria.subcategorias">
+            <a [routerLink]="['/productos/subcategoria', sub.slug]">
+              {{ sub.nombre }}
+            </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li>
+        <a [routerLink]="['/productos']">Rutinas</a>
+      </li>
+
+       <li>
+        <a [routerLink]="['/productos']">Mas Vendidos</a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+</div>

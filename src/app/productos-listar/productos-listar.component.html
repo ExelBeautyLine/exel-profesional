@@ -1,0 +1,75 @@
+<section class="shop-page">
+
+  <div class="shop-toolbar">
+    <div class="toolbar-line"></div>
+
+    <div class="toolbar-content">
+      <button class="toolbar-select">
+        <span>Categoría</span>
+        <span class="arrow">⌄</span>
+      </button>
+
+      <button class="toolbar-select">
+        <span>Ordenar por</span>
+        <span class="arrow">⌄</span>
+      </button>
+    </div>
+  </div>
+
+  <section class="products-section">
+
+    <div class="products-grid">
+
+      <article
+        class="product-card"
+        *ngFor="let producto of productos">
+
+        <div class="product-image-box">
+
+        <img
+            [src]="
+                'assets/img/' +
+                producto.imagen_url +
+                (hoverProducto === producto.id ? '-1.jpg' : '-0.jpg')
+            "
+            [alt]="producto.nombre"
+            (mouseenter)="hoverProducto = producto.id"
+            (mouseleave)="hoverProducto = null"
+         />
+         
+        </div>
+
+        <div class="product-body">
+
+          <h3 class="product-title">
+            {{producto.nombre}}
+          </h3>
+
+          <div class="price">
+            {{producto.precio_base | currency:'ARS':'symbol':'1.0-0'}}
+          </div>
+
+          <div class="transfer-price">
+            {{producto.precio_base * 0.95 | currency:'ARS':'symbol':'1.0-0'}}
+            con Transferencia
+          </div>
+
+          <div class="installments">
+            3 x
+            {{producto.precio_base/3 | currency:'ARS':'symbol':'1.0-0'}}
+            sin interés
+          </div>
+
+          <button class="buy-button">
+            Comprar
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+</section>

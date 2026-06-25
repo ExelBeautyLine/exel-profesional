@@ -1,13 +1,31 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { CartComponent } from '../cart/cart.component';
+import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../services/menu-service';
+
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterModule, CartComponent],
+  standalone: false,
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent {}
+
+
+export class NavbarComponent implements OnInit {
+
+
+  menu: any[] = [];
+
+  constructor(private navbarService: NavbarService) {}
+
+  ngOnInit(): void {
+
+    this.navbarService.getMenu().subscribe(menu => {
+      this.menu = menu;
+      console.log(menu);
+    });
+
+  }
+
+  menuOpen = false;
+
+}
