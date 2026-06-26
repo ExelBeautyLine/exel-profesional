@@ -9,9 +9,11 @@ export const handler: Handler = async () => {
       SELECT
           c.id,
           c.nombre,
+          c.slug,
 
           s.id AS subcategoria_id,
-          s.nombre AS subcategoria_nombre
+          s.nombre AS subcategoria_nombre,
+          s.slug AS subcategoria_slug
 
       FROM categorias c
 
@@ -32,6 +34,7 @@ export const handler: Handler = async () => {
         categoria = {
           id: row.id,
           nombre: row.nombre,
+          slug: row.slug,
           subcategorias: []
         };
 
@@ -42,7 +45,8 @@ export const handler: Handler = async () => {
 
         categoria.subcategorias.push({
           id: row.subcategoria_id,
-          nombre: row.subcategoria_nombre
+          nombre: row.subcategoria_nombre,
+          slug: row.subcategoria_slug
         });
 
       }

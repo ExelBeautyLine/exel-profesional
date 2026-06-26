@@ -20,8 +20,10 @@ export const handler: Handler = async (event) => {
       `
       SELECT p.*
       FROM productos p
+      INNER JOIN producto_subcategoria ps
+          ON ps.producto_id = p.id
       INNER JOIN subcategorias s
-        ON p.subcategorias_id = s.id
+          ON s.id = ps.subcategoria_id
       WHERE s.slug = $1
       ORDER BY p.nombre
       `,

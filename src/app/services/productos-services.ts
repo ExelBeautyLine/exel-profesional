@@ -21,7 +21,7 @@ export class ProductosService {
   listarPorSubcategoria(slug: string) {
 
   return this.http.get<Producto[]>(
-    '/.netlify/functions/listar-subcategorias?slug=' + slug
+    '/.netlify/functions/listar-productos-subcategorias?slug=' + slug
   );
 
 }
