@@ -11,7 +11,7 @@ export interface ConfiguracionPrecios {
         porcentaje_recargo: number;
     }[];
 
-     cuotas: Cuota[];
+    cuotas: Cuota[];
 }
 
 
@@ -36,26 +36,31 @@ export interface PrecioCalculado {
     base: number;
     final: number;
     descuento: number;
+
     transferencia: number;
     tarjeta: number;
 
-    mediosPago: MedioPago[];
     cuotas: CuotaCalculada[];
 }
 
 
 
 
-export async function calcularPrecio(producto: any,configuracion: ConfiguracionPrecios): Promise<PrecioCalculado> {
+export async function calcularPrecio(producto: any, configuracion: ConfiguracionPrecios): Promise<PrecioCalculado> {
 
-    const descuentoPromocion = await obtenerMejorPromocion(producto.id);
-    const precioPromocional = producto.precio_base *(1 - descuentoPromocion / 100);
-    
+    const promocion = await obtenerMejorPromocion(producto.id);
+
+    const precioPromocional = producto.precio_base * (1 - promocion.descuento / 100);
+
     const mediosPago = configuracion.mediosPago.map((medio) => {
 
         let precio = precioPromocional;
 
-        precio -= precio * (Number(medio.porcentaje_descuento) / 100);
+        if (promocion.acumulable) {
+
+            precio -= precio * (Number(medio.porcentaje_descuento) / 100);
+
+        }
 
         precio += precio * (Number(medio.porcentaje_recargo) / 100);
 
@@ -65,15 +70,15 @@ export async function calcularPrecio(producto: any,configuracion: ConfiguracionP
         };
 
     });
-    
+
     const transferencia = mediosPago.find(
-    medio => medio.nombre === "Transferencia"
+        medio => medio.nombre === "Transferencia"
     );
 
     const tarjeta = mediosPago.find(
-    (medio: any) => medio.nombre.trim() === "Tarjeta"
+        (medio: any) => medio.nombre.trim() === "Tarjeta"
     );
-    
+
 
     const cuotas = await calcularCuotas(
         tarjeta ? tarjeta.precio : precioPromocional,
@@ -83,11 +88,12 @@ export async function calcularPrecio(producto: any,configuracion: ConfiguracionP
 
     return {
 
+
         base: producto.precio_base,
 
         final: precioPromocional,
 
-        descuento: descuentoPromocion,
+        descuento: promocion.descuento,
 
         transferencia: transferencia
             ? transferencia.precio
@@ -98,6 +104,7 @@ export async function calcularPrecio(producto: any,configuracion: ConfiguracionP
             : precioPromocional,
 
         cuotas
+
 
     };
 
