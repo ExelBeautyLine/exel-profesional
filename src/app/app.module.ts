@@ -7,8 +7,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import {ProductosListaComponent} from "./productos-listar/productos-listar.component";
-import { CommonModule } from '@angular/common'
-
+import { CommonModule } from '@angular/common';
+import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
 
 
 
@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common'
     AppComponent,
     NavbarComponent,
     ProductosListaComponent,
+    ProductoDetalleComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,6 @@ import { CommonModule } from '@angular/common'
     FormsModule,
     FooterComponent,
     CommonModule,
-    
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi())

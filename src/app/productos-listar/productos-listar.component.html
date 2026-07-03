@@ -24,9 +24,9 @@
         class="product-card"
         *ngFor="let producto of productos">
 
+      <a [routerLink]="['/productos', producto.slug]">
         <div class="product-image-box">
-
-        <img
+          <img
             [src]="
                 'assets/img/' +
                 producto.imagen_url +
@@ -36,8 +36,8 @@
             (mouseenter)="hoverProducto = producto.id"
             (mouseleave)="hoverProducto = null"
          />
-         
         </div>
+      </a>
 
         <div class="product-body">
 
@@ -46,17 +46,25 @@
           </h3>
 
           <div class="price">
-            {{producto.precio_base | currency:'ARS':'symbol':'1.0-0'}}
+            {{producto.precio.base | currency:'ARS':'symbol':'1.0-0'}}
           </div>
 
           <div class="transfer-price">
-            {{producto.precio_base * 0.95 | currency:'ARS':'symbol':'1.0-0'}}
+            {{producto.precio.transferencia | currency:'ARS':'symbol':'1.0-0'}}
             con Transferencia
           </div>
 
-          <div class="installments">
-            3 x
-            {{producto.precio_base/3 | currency:'ARS':'symbol':'1.0-0'}}
+          <div class="installments"
+            class="installments"
+            *ngIf="producto.precio.cuotas.length">
+
+              {{ producto.precio.cuotas[1].cantidad }} x
+
+              {{
+                  producto.precio.cuotas[1].valorCuota
+                  | currency:'ARS':'symbol':'1.0-0'
+              }}
+
             sin interés
           </div>
 

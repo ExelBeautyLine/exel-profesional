@@ -24,7 +24,13 @@ export class ProductosService {
     '/.netlify/functions/listar-productos-subcategorias?slug=' + slug
   );
 
-}
+  }
+
+  obtenerProducto(slug: string) {
+    return this.http.get<Producto>(
+      '/.netlify/functions/producto?slug=' + slug
+    );
+  }
 
 }
   

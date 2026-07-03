@@ -1,0 +1,215 @@
+.detalle-page{
+
+    max-width:1400px;
+    margin:auto;
+    padding:40px 20px;
+
+}
+
+.detalle-top{
+
+    display:grid;
+    grid-template-columns:100px 650px 1fr;
+    gap:35px;
+    align-items:start;
+
+}
+
+.thumbs{
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+}
+
+.thumbs img{
+
+    width:80px;
+    border:1px solid #ddd;
+    cursor:pointer;
+    transition:.2s;
+
+}
+
+.thumbs img:hover{
+
+    border-color:#97b04d;
+
+}
+
+.thumbs img.active{
+
+    border:2px solid #97b04d;
+
+}
+
+.imagen-principal{
+
+    border:1px solid #ececec;
+
+}
+
+.imagen-principal img{
+
+    width:100%;
+    display:block;
+
+}
+
+.info{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.breadcrumb{
+
+    font-size:13px;
+    color:#888;
+    margin-bottom:15px;
+
+}
+
+.info h1{
+
+    font-size:40px;
+    line-height:1.2;
+    margin-bottom:25px;
+    font-weight:600;
+
+}
+
+.precio{
+
+    font-size:40px;
+    font-weight:700;
+
+}
+
+.transferencia{
+
+    color:#93af49;
+    font-size:22px;
+    margin-top:10px;
+
+}
+
+.cuotas{
+
+    margin-top:15px;
+    color:#777;
+
+}
+
+.descuento{
+
+    margin-top:10px;
+    color:#93af49;
+
+}
+
+.stock{
+
+    margin-top:25px;
+    font-size:15px;
+
+}
+
+.presentacion{
+
+    margin-top:30px;
+
+}
+
+.presentacion button{
+
+    margin-top:10px;
+    border:1px solid #bbb;
+    background:white;
+    padding:8px 18px;
+    cursor:pointer;
+
+}
+
+.cantidad{
+
+    display:flex;
+    margin-top:25px;
+
+}
+
+.cantidad button{
+
+    width:45px;
+    height:45px;
+    border:1px solid #ccc;
+    background:white;
+
+}
+
+.cantidad input{
+
+    width:60px;
+    border:1px solid #ccc;
+    text-align:center;
+
+}
+
+.comprar{
+
+    margin-top:25px;
+    height:55px;
+    border:none;
+    background:#97b04d;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+
+}
+
+.descripcion{
+
+    margin-top:70px;
+    max-width:900px;
+
+}
+
+.descripcion h2{
+
+    margin-bottom:20px;
+    font-size:28px;
+
+}
+
+.descripcion h3{
+
+    margin-top:35px;
+    margin-bottom:10px;
+
+}
+
+.descripcion p{
+
+    line-height:1.8;
+    color:#444;
+
+}
+
+@media(max-width:1100px){
+
+    .detalle-top{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .thumbs{
+
+        flex-direction:row;
+        order:2;
+
+    }
+
+}

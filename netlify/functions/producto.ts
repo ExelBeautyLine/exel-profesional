@@ -4,7 +4,7 @@ import { calcularPrecio } from './lib/precio';
 
 export const handler: Handler = async (event) => {
 
-  const slug = event.queryStringParameters?.['slug'];
+const slug = event.queryStringParameters?.['slug'];
 
   if (!slug) {
     return {
@@ -14,6 +14,7 @@ export const handler: Handler = async (event) => {
       })
     };
   }
+
 
   try {
 
@@ -48,42 +49,41 @@ export const handler: Handler = async (event) => {
     };
 
 
-    const result = await pool.query(
-      `
-      SELECT p.*
-      FROM productos p
-      INNER JOIN producto_subcategoria ps
-          ON ps.producto_id = p.id
-      INNER JOIN subcategorias s
-          ON s.id = ps.subcategoria_id
-      WHERE s.slug = $1
-      ORDER BY p.nombre
-      `,
-      [slug]
-    );
+    const result = await pool.query(`
+      SELECT *
+      FROM productos
+      WHERE slug = $1;
+    `, [slug]);
 
-    const productos = result.rows;
-        
-    for (const producto of productos) {
-        producto.precio = await calcularPrecio(producto,configuracion);
-       
+   const producto = result.rows[0];
+
+    if (!producto) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({
+          error: "Producto no encontrado"
+        })
+      };
     }
-    
-    
+ //como ya existe precio en la base de datos, se calculan los precios
+// y se asignan a la propiedad precios del producto
+ 
+    producto.precio= await calcularPrecio(producto,configuracion);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(productos)
+      body: JSON.stringify(producto)
     };
 
   } catch (error) {
 
-    console.error(error);
+    console.error('ERROR POSTGRES:', error);
 
     return {
       statusCode: 500,
       body: JSON.stringify(error)
     };
+
 
   }
 

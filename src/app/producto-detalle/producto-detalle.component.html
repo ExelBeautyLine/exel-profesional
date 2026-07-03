@@ -1,0 +1,174 @@
+<section class="detalle-page" *ngIf="producto">
+
+    <div class="detalle-top">
+
+        <!-- MINIATURAS -->
+
+        <div class="thumbs">
+
+            <img
+                *ngFor="let img of imagenes"
+                [src]="img"
+                [class.active]="img === imagenSeleccionada"
+                (click)="imagenSeleccionada = img">
+
+        </div>
+
+        <!-- IMAGEN -->
+
+        <div class="imagen-principal">
+
+            <img
+                [src]="imagenSeleccionada"
+                [alt]="producto.nombre">
+
+        </div>
+
+        <!-- INFORMACIÓN -->
+
+        <div class="info">
+
+            <div class="breadcrumb">
+
+                Inicio /
+                {{producto.nombre}}
+
+            </div>
+
+            <h1>
+
+                {{producto.nombre}}
+
+            </h1>
+
+            <div class="precio">
+
+                {{producto.precio.final | currency:'ARS':'symbol':'1.0-0'}}
+
+            </div>
+
+            <div class="transferencia">
+
+                {{producto.precio.transferencia | currency:'ARS':'symbol':'1.0-0'}}
+
+                con Transferencia
+
+            </div>
+
+            <div
+                class="cuotas"
+                *ngIf="producto.precio.cuotas.length">
+
+                {{producto.precio.cuotas[2].cantidad}}
+                cuotas sin interés de
+
+                {{
+                    producto.precio.cuotas[2].valorCuota
+                    | currency:'ARS':'symbol':'1.0-0'
+                }}
+
+            </div>
+
+            <div class="descuento">
+
+                {{producto.precio.descuento}}%
+
+                de descuento pagando con Transferencia
+
+            </div>
+
+            <div class="stock">
+
+                {{producto.stock}}
+
+                en stock
+
+            </div>
+
+            <div class="presentacion">
+
+                Tamaño
+
+                <button>
+
+                    {{producto.presentacion}}
+
+                </button>
+
+            </div>
+
+            <div class="cantidad">
+
+                <button>-</button>
+
+                <input
+                    type="text"
+                    value="1">
+
+                <button>+</button>
+
+            </div>
+
+            <button class="comprar">
+
+                Agregar al carrito
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <section class="descripcion">
+
+        <h2>
+
+            Descripción
+
+        </h2>
+
+        <p>
+
+            {{producto.descripcion}}
+
+        </p>
+
+        <h3>
+
+            Ingredientes activos
+
+        </h3>
+
+        <p>
+
+            {{producto.ingredientes_activos}}
+
+        </p>
+
+        <h3>
+
+            Beneficios
+
+        </h3>
+
+        <p>
+
+            {{producto.beneficios}}
+
+        </p>
+
+        <h3>
+
+            Modo de uso
+
+        </h3>
+
+        <p>
+
+            {{producto.modo_uso}}
+
+        </p>
+
+    </section>
+
+</section>

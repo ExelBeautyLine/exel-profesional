@@ -1,4 +1,12 @@
-export interface Producto{
+
+export interface Cuota {
+    cantidad: number;
+    precioTotal: number;
+    valorCuota: number;
+    interes: number;
+}
+
+export interface Producto {
     id: number;
     nombre: String;
     codigo: String;
@@ -14,4 +22,14 @@ export interface Producto{
     destacado: boolean;
     activo: boolean;
     slug: String;
+    cantidad_imagenes: number;
+    precio: {
+        base: number;
+        final: number;
+        descuento: number;
+        transferencia: number;
+        tarjeta: number;
+        cuotas: Cuota[];
+
+    }
 }
