@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import {ProductosListaComponent} from "./productos-listar/productos-listar.component";
 import { CommonModule } from '@angular/common';
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 
 
@@ -18,6 +19,7 @@ import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.co
     NavbarComponent,
     ProductosListaComponent,
     ProductoDetalleComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

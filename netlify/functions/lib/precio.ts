@@ -1,20 +1,6 @@
-import { pool } from './db';
 import { obtenerMejorPromocion } from "./promociones";
-import { calcularCuotas, Cuota } from "./cuotas";
-
-
-
-export interface ConfiguracionPrecios {
-    mediosPago: {
-        nombre: string;
-        porcentaje_descuento: number;
-        porcentaje_recargo: number;
-    }[];
-
-    cuotas: Cuota[];
-}
-
-
+import { calcularCuotas} from "./cuotas";
+import { ConfiguracionPrecios } from "./configuracion-precios";
 
 
 

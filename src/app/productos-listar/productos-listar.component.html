@@ -24,7 +24,7 @@
         class="product-card"
         *ngFor="let producto of productos">
 
-      <a [routerLink]="['/productos', producto.slug]">
+       <a [routerLink]="['/productos', producto.slug]">
         <div class="product-image-box">
           <img
             [src]="
@@ -37,7 +37,7 @@
             (mouseleave)="hoverProducto = null"
          />
         </div>
-      </a>
+       </a>
 
         <div class="product-body">
 
@@ -68,8 +68,12 @@
             sin interés
           </div>
 
-          <button class="buy-button">
+          <button
+            class="buy-button"
+            (click)="comprar(producto)">
+
             Comprar
+
           </button>
 
         </div>

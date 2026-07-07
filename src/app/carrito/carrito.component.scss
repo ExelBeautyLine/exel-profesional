@@ -1,0 +1,769 @@
+/* ==========================================
+   CONTENEDOR
+========================================== */
+
+.carrito-container {
+
+    max-width: 1450px;
+
+    margin: 40px auto;
+
+    padding: 0 25px;
+
+}
+
+.breadcrumb {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+
+    color: #8a8a8a;
+
+}
+
+.breadcrumb a {
+
+    text-decoration: none;
+
+    color: inherit;
+
+}
+
+h1 {
+
+    font-size: 46px;
+
+    font-weight: 600;
+
+    margin-bottom: 35px;
+
+}
+
+/* ==========================================
+   GRID GENERAL
+========================================== */
+
+.carrito-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 360px;
+
+    gap: 35px;
+
+    align-items: start;
+
+}
+
+/* ==========================================
+   LISTA PRODUCTOS
+========================================== */
+
+.productos {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+/* ==========================================
+   TARJETA PRODUCTO
+========================================== */
+
+.producto-card {
+
+    display: grid;
+
+    grid-template-columns: 170px 1fr 150px 220px;
+
+    gap: 30px;
+
+    align-items: center;
+
+    padding: 28px;
+
+    background: #fff;
+
+    border: 1px solid #ececec;
+
+    border-radius: 12px;
+
+    transition: .25s;
+
+}
+
+.producto-card:hover {
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.06);
+
+}
+
+/* ==========================================
+   IMAGEN
+========================================== */
+
+.producto-imagen {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.producto-imagen img {
+
+    width: 150px;
+
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+}
+
+/* ==========================================
+   INFORMACIÓN
+========================================== */
+
+.producto-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.producto-info h2 {
+
+    font-size: 34px;
+
+    line-height: 1.1;
+
+    margin-bottom: 12px;
+
+    font-weight: 600;
+
+}
+
+.presentacion {
+
+    color: #777;
+
+    margin-bottom: 18px;
+
+}
+
+.stock {
+
+    color: #82a83c;
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+
+}
+
+.precios {
+
+    display: flex;
+
+    gap: 45px;
+
+}
+
+.precios div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+.precios span {
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+.precios strong {
+
+    font-size: 28px;
+
+    font-weight: 600;
+
+}
+
+.verde {
+
+    color: #84a93d;
+
+}
+
+/* ==========================================
+   CANTIDAD
+========================================== */
+
+.producto-acciones {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.cantidad {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    width: 120px;
+
+    height: 46px;
+
+    border: 1px solid #dcdcdc;
+
+}
+
+.cantidad button {
+
+    width: 40px;
+
+    height: 44px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .2s;
+
+}
+
+.cantidad button:hover {
+
+    background: #8fb441;
+
+    color: white;
+
+}
+
+.cantidad span {
+
+    font-size: 18px;
+
+    font-weight: 500;
+
+}
+
+/* ==========================================
+   ELIMINAR
+========================================== */
+
+.eliminar {
+
+    background: none;
+
+    border: none;
+
+    color: #888;
+
+    cursor: pointer;
+
+    text-decoration: underline;
+
+    transition: .2s;
+
+}
+
+.eliminar:hover {
+
+    color: #d32f2f;
+
+}
+
+/* ==========================================
+   SUBTOTALES
+========================================== */
+
+.producto-subtotal {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+}
+
+.subtotal-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+.subtotal-item span {
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+.subtotal-item strong {
+
+    font-size: 30px;
+
+    font-weight: 600;
+
+}
+
+/* ==========================================
+   MEDIOS DE ENVÍO
+========================================== */
+
+.medios-envio {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 25px 30px;
+
+    background: #fff;
+
+    border: 1px solid #ececec;
+
+    border-radius: 12px;
+
+}
+
+.medios-envio button {
+
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.medios-envio button:hover {
+
+    color: #8fb441;
+
+}
+
+/* ==========================================
+   RESUMEN
+========================================== */
+
+.resumen {
+
+    position: sticky;
+
+    top: 20px;
+
+    background: #fff;
+
+    border: 1px solid #ececec;
+
+    border-radius: 12px;
+
+    padding: 28px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+
+}
+
+.envio-gratis {
+
+    margin-bottom: 28px;
+
+    font-size: 15px;
+
+}
+
+.barra {
+
+    height: 8px;
+
+    background: #ececec;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-top: 15px;
+
+}
+
+.progreso {
+
+    width: 65%;
+
+    height: 100%;
+
+    background: #8fb441;
+
+}
+
+.linea {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 18px 0;
+
+    font-size: 15px;
+
+}
+
+.linea strong {
+
+    font-size: 17px;
+
+}
+
+.total {
+
+    margin: 25px 0;
+
+}
+
+.total div {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+}
+
+.total strong {
+
+    font-size: 24px;
+
+}
+
+.ahorro {
+
+    background: #f5f9ed;
+
+    border: 1px solid #dbe8bf;
+
+    border-radius: 10px;
+
+    padding: 16px;
+
+    color: #6d8e2f;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin: 30px 0;
+
+}
+
+.btn-comprar {
+
+    width: 100%;
+
+    height: 60px;
+
+    border: none;
+
+    background: #8fb441;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+    border-radius: 4px;
+
+}
+
+.btn-comprar:hover {
+
+    background: #769c34;
+
+}
+
+.seguridad {
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width:1200px){
+
+    .carrito-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .resumen{
+
+        position:static;
+
+        width:100%;
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:900px){
+
+    h1{
+
+        font-size:34px;
+
+    }
+
+    .producto-card{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+    }
+
+    .producto-imagen{
+
+        justify-content:center;
+
+    }
+
+    .producto-imagen img{
+
+        width:180px;
+
+        height:180px;
+
+    }
+
+    .producto-info{
+
+        text-align:center;
+
+    }
+
+    .precios{
+
+        justify-content:center;
+
+    }
+
+    .producto-acciones{
+
+        align-items:center;
+
+    }
+
+    .producto-subtotal{
+
+        border-top:1px solid #ececec;
+
+        padding-top:20px;
+
+    }
+
+}
+.vaciar {
+
+    width: 100%;
+
+    margin-bottom: 15px;
+
+    height: 48px;
+
+    border: 1px solid #ccc;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.vaciar:hover {
+
+    background: #f5f5f5;
+
+}
+
+.carrito-vacio {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+}
+
+.carrito-vacio h2 {
+
+    font-size: 36px;
+
+    margin-bottom: 15px;
+
+}
+
+.carrito-vacio p {
+
+    margin-bottom: 30px;
+
+}
+
+.seguir {
+
+    display: inline-block;
+
+    padding: 15px 35px;
+
+    background: #8fb441;
+
+    color: white;
+
+    text-decoration: none;
+
+}
+
+@media (max-width:600px){
+
+    .carrito-container{
+
+        padding:15px;
+
+    }
+
+    h1{
+
+        font-size:30px;
+
+    }
+
+    .breadcrumb{
+
+        font-size:13px;
+
+    }
+
+    .producto-card{
+
+        padding:20px;
+
+    }
+
+    .producto-info h2{
+
+        font-size:24px;
+
+    }
+
+    .producto-imagen img{
+
+        width:140px;
+
+        height:140px;
+
+    }
+
+    .precios{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        align-items:center;
+
+    }
+
+    .subtotal-item strong{
+
+        font-size:24px;
+
+    }
+
+    .cantidad{
+
+        width:130px;
+
+    }
+
+    .resumen{
+
+        padding:22px;
+
+    }
+
+}
+

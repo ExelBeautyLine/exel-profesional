@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from './Producto';
 import { ProductosService } from '../services/productos-services';
+import { CarritoService } from '../carrito/carrito.service';
+import { CarritoApiService } from '../carrito/carrito-api-service';
 
 @Component({
   selector: 'app-productos-listar',
@@ -17,7 +19,9 @@ export class ProductosListaComponent implements OnInit {
 
   constructor(
     private productosDataService: ProductosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private carritoService: CarritoService,
+    private carritoApiService: CarritoApiService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +52,31 @@ export class ProductosListaComponent implements OnInit {
       }
 
     });
+
+
+  }
+
+  comprar(producto: Producto): void {
+
+    this.carritoService.agregarProducto(producto.id, 1);
+
+    this.carritoApiService
+        .obtenerCarrito()
+        .subscribe({
+
+            next: (respuesta) => {
+
+                console.log("Respuesta backend:", respuesta);
+
+            },
+
+            error: (error) => {
+
+                console.error(error);
+
+            }
+
+        });
 
   }
 

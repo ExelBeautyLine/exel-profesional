@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/menu-service';
+import { CarritoService} from '../carrito/carrito.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit {
 
   menu: any[] = [];
 
-  constructor(private navbarService: NavbarService) {}
+  constructor(private navbarService: NavbarService, private carritoService: CarritoService) {}
 
   ngOnInit(): void {
 
@@ -27,5 +28,11 @@ export class NavbarComponent implements OnInit {
   }
 
   menuOpen = false;
+
+  get cantidadCarrito(): number {
+
+    return this.carritoService.cantidadItems();
+
+  }
 
 }

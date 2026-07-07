@@ -128,6 +128,56 @@
   }
 }
 
+.carrito-navbar{
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+}
+
+.badge{
+
+    position: absolute;
+
+    top: -6px;
+
+    right: -10px;
+
+    min-width: 18px;
+
+    height: 18px;
+
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background: #d32f2f;
+
+    color: #fff;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    border: 2px solid #fff;
+
+    z-index: 100;
+
+    box-sizing: border-box;
+
+}
+
 @media (max-width: 900px) {
   .hamburger { display: block; }
 

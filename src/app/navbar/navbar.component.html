@@ -12,7 +12,17 @@
 
     <div class="icons">
       <i class="fa-regular fa-user"></i>
-      <i class="fa-solid fa-bag-shopping"></i>
+      <a routerLink="/carrito" class="carrito-navbar">
+
+        <i class="fa-solid fa-shopping-cart"></i>
+
+        <span class="badge" *ngIf="cantidadCarrito > 0">
+
+          {{ cantidadCarrito }}
+
+        </span>
+
+      </a>
     </div>
 
   </div>
@@ -20,20 +30,17 @@
   <nav class="navbar-menu" [class.open]="menuOpen">
 
     <ul>
-      
+
       <li>
         <a [routerLink]="['/productos']">Inicio</a>
       </li>
 
 
-      <li *ngFor="let categoria of menu"
-          (mouseenter)="categoria.open = true"
-          (mouseleave)="categoria.open = false">
+      <li *ngFor="let categoria of menu" (mouseenter)="categoria.open = true" (mouseleave)="categoria.open = false">
 
         <a>{{ categoria.nombre }}</a>
 
-        <ul class="submenu" [class.submenu--visible]="categoria.open"
-            *ngIf="categoria.subcategorias?.length">
+        <ul class="submenu" [class.submenu--visible]="categoria.open" *ngIf="categoria.subcategorias?.length">
 
           <li *ngFor="let sub of categoria.subcategorias">
             <a [routerLink]="['/productos/subcategoria', sub.slug]">
@@ -44,7 +51,7 @@
         </ul>
       </li>
 
-       <li>
+      <li>
         <a [routerLink]="['/productos']">Mas Vendidos</a>
       </li>
 
