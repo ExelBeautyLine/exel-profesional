@@ -1,0 +1,202 @@
+<div class="checkout-container" *ngIf="resumen">
+
+    <form class="checkout-left" [formGroup]="form">
+
+        <h2>Checkout</h2>
+
+        <!-- DATOS -->
+
+        <div class="card">
+
+            <h3>Datos personales</h3>
+
+            <div class="grid">
+
+                <input type="text" placeholder="Nombre">
+
+                <input type="text" placeholder="Apellido">
+
+                <input type="email" placeholder="Email">
+
+                <input type="text" placeholder="Teléfono">
+
+            </div>
+
+        </div>
+
+        <!-- ENTREGA -->
+
+        <div class="card">
+
+            <h3>Entrega</h3>
+
+            <label class="radio">
+
+                <input type="radio" value="retiro" formControlName="entrega">
+
+                <div>
+
+                    <strong>Retiro en el local</strong>
+
+                    <p>Castelli 2179 · Mar del Plata</p>
+
+                </div>
+
+            </label>
+
+            <label class="radio">
+
+                <input type="radio" value="envio" formControlName="entrega">
+
+                <div>
+
+                    <strong>Envío a domicilio</strong>
+
+                    <p>$9.408</p>
+
+                </div>
+
+            </label>
+
+        </div>
+        <div class="card" *ngIf="entrega === 'envio'">
+
+            <h3>Dirección de envío</h3>
+
+            <div class="grid">
+
+                <input type="text" placeholder="Provincia" formControlName="provincia">
+
+                <input type="text" placeholder="Localidad" formControlName="localidad">
+
+                <input type="text" placeholder="Código Postal" formControlName="codigoPostal">
+
+                <input type="text" placeholder="Calle" formControlName="calle">
+
+                <input type="text" placeholder="Número" formControlName="numero">
+
+                <input type="text" placeholder="Piso" formControlName="piso">
+
+                <input type="text" placeholder="Departamento" formControlName="departamento">
+
+            </div>
+
+            <textarea rows="4" placeholder="Observaciones" formControlName="observaciones">
+
+    </textarea>
+
+        </div>
+
+        <!-- PAGO -->
+
+        <div class="card">
+
+            <h3>Forma de pago</h3>
+
+            <label class="radio">
+
+                <input type="radio" value="transferencia" formControlName="pago">
+
+                <div>
+
+                    <strong>Transferencia bancaria</strong>
+
+                    <p>10% OFF</p>
+
+                </div>
+
+            </label>
+
+            <label class="radio">
+
+
+                <input type="radio" value="tarjeta" formControlName="pago">
+
+                <div>
+
+                    <strong>Tarjeta</strong>
+
+                    <p>Mercado Pago</p>
+
+                </div>
+
+            </label>
+
+        </div>
+
+    </form>
+
+    <!-- RESUMEN -->
+
+    <div class="checkout-right">
+
+        <div class="card resumen">
+
+            <h3>Resumen</h3>
+
+            <div class="fila">
+
+                <span>Productos</span>
+
+                <span>{{ resumen.cantidadItems }}</span>
+
+            </div>
+
+            <div class="fila">
+
+                <span>Subtotal</span>
+
+                <span>{{ resumen.subtotalTarjeta | currency:'ARS' }}</span>
+
+            </div>
+
+            <div class="fila">
+
+                <span>Envío</span>
+
+                <span>{{ resumen.costoEnvio | currency:'ARS' }}</span>
+
+            </div>
+
+            <hr>
+
+            <div class="fila total">
+
+                <span>Total</span>
+
+                <span *ngIf="formaPago === 'tarjeta'">
+
+                    {{ resumen.totalTarjeta | currency:'ARS' }}
+
+                </span>
+
+                <span *ngIf="formaPago === 'transferencia'">
+
+                    {{ resumen.totalTransferencia | currency:'ARS' }}
+
+                </span>
+
+            </div>
+            <div class="ahorro" *ngIf="formaPago === 'transferencia'">
+
+                Ahorrás
+
+                {{ resumen.totalTarjeta - resumen.totalTransferencia | currency:'ARS' }}
+
+                pagando por transferencia.
+
+            </div>
+            <button class="btn-continuar">
+
+                {{ formaPago === 'tarjeta'
+                ? 'Pagar con Mercado Pago'
+                : 'Continuar por WhatsApp'
+                }}
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

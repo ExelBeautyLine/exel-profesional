@@ -73,10 +73,15 @@
                         ✔ Stock disponible
 
                     </p>
-
-                    <p class="sin-stock" *ngIf="item.producto.stock == 0">
+                    <p class="sin-stock" *ngIf="item.sinStock">
 
                         Sin stock
+
+                    </p>
+
+                    <p class="stock-restante" *ngIf="item.producto.stock > 0">
+
+                        Stock disponible: {{ item.producto.stock }}
 
                     </p>
 
@@ -96,10 +101,9 @@
 
                             </span>
 
-                            <strong>
+                            <strong [class.tachado]="item.sinStock">
 
-                                {{ item.producto.precio.tarjeta
-                                | currency:'ARS':'symbol':'1.0-0' }}
+                                {{ item.producto.precio.tarjeta | currency:'ARS' }}
 
                             </strong>
 
@@ -113,7 +117,10 @@
 
                             </span>
 
-                            <strong class="verde">
+                            <strong class="verde"
+
+                                class="verde"
+                                [class.tachado]="item.sinStock">
 
                                 {{ item.producto.precio.transferencia
                                 | currency:'ARS':'symbol':'1.0-0' }}
@@ -168,10 +175,8 @@
 
                         </span>
 
-                        <button (click)="aumentar(item)">
-
+                        <button (click)="aumentar(item)" [disabled]="item.cantidad >= item.producto.stock">
                             +
-
                         </button>
 
                     </div>
@@ -281,8 +286,7 @@
 
                 <div class="barra">
 
-                    <div class="progreso"
-                        [style.width.%]="obtenerPorcentajeEnvioGratis()">
+                    <div class="progreso" [style.width.%]="obtenerPorcentajeEnvioGratis()">
                     </div>
 
                 </div>
@@ -455,9 +459,7 @@
             </button>
 
             <button class="btn-comprar" (click)="continuarCompra()">
-
-                Continuar compra
-
+                <a routerLink="/checkout">Continuar compra</a>
             </button>
 
             <p class="seguridad">

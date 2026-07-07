@@ -61,6 +61,14 @@ export class CarritoComponent implements OnInit {
 
     aumentar(item: ItemCarritoDetalle): void {
 
+         if (item.cantidad >= item.producto.stock) {
+
+            alert(`Solo hay ${item.producto.stock} unidades disponibles.`);
+
+            return;
+
+        }
+
         this.carritoService.actualizarCantidad(
 
             item.producto.id,

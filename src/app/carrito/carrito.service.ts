@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ItemCarrito} from './carrito.model';
+import { ItemCarrito } from './carrito.model';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -16,28 +16,28 @@ export class CarritoService {
 
     if (isPlatformBrowser(this.platformId)) {
 
-          this.cargar();
+      this.cargar();
 
-      }
+    }
 
   }
 
-  agregarProducto(productoId: number,cantidad: number): void {
+  agregarProducto(productoId: number, cantidad: number): void {
 
-     const item = this.items.find(
-        item => item.productoId === productoId
+    const item = this.items.find(
+      item => item.productoId === productoId
     );
 
     if (item) {
 
-        item.cantidad += cantidad;
+      item.cantidad += cantidad;
 
     } else {
 
-        this.items.push({
-            productoId,
-            cantidad
-        });
+      this.items.push({
+        productoId,
+        cantidad
+      });
 
     }
 
@@ -46,24 +46,24 @@ export class CarritoService {
   }
 
   eliminarProducto(productoId: number): void {
-    
+
     this.items = this.items.filter(
-        item => item.productoId !== productoId
+      item => item.productoId !== productoId
     );
 
     this.guardar();
-  
+
   }
 
   actualizarCantidad(productoId: number, cantidad: number): void {
 
-      const item = this.items.find(
-        item => item.productoId === productoId
+    const item = this.items.find(
+      item => item.productoId === productoId
     );
 
     if (!item) {
 
-        return;
+      return;
 
     }
 
@@ -71,9 +71,9 @@ export class CarritoService {
 
     if (item.cantidad <= 0) {
 
-        this.eliminarProducto(productoId);
+      this.eliminarProducto(productoId);
 
-        return;
+      return;
 
     }
 
@@ -100,9 +100,9 @@ export class CarritoService {
 
     return this.items.reduce(
 
-        (total, item) => total + item.cantidad,
+      (total, item) => total + item.cantidad,
 
-        0
+      0
 
     );
 
@@ -110,8 +110,8 @@ export class CarritoService {
 
   existeProducto(productoId: number): boolean {
 
-      return this.items.some(
-        item => item.productoId === productoId
+    return this.items.some(
+      item => item.productoId === productoId
     );
 
   }
@@ -120,23 +120,23 @@ export class CarritoService {
 
     if (!isPlatformBrowser(this.platformId)) {
 
-        return;
+      return;
 
     }
 
     localStorage.setItem(
-        this.STORAGE_KEY,
-        JSON.stringify(this.items)
+      this.STORAGE_KEY,
+      JSON.stringify(this.items)
     );
 
   }
 
 
   private cargar(): void {
-    
+
     if (!isPlatformBrowser(this.platformId)) {
 
-        return;
+      return;
 
     }
 
@@ -144,11 +144,21 @@ export class CarritoService {
 
     if (carrito) {
 
-        this.items = JSON.parse(carrito);
+      this.items = JSON.parse(carrito);
 
     }
   }
 
-  
+  obtenerCantidad(productoId: number): number {
+
+    const item = this.items.find(
+      item => item.productoId === productoId
+    );
+
+    return item ? item.cantidad : 0;
+
+  }
+
+
 
 }

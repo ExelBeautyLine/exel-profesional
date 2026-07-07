@@ -22,7 +22,7 @@ export class ProductosListaComponent implements OnInit {
     private route: ActivatedRoute,
     private carritoService: CarritoService,
     private carritoApiService: CarritoApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -58,25 +58,35 @@ export class ProductosListaComponent implements OnInit {
 
   comprar(producto: Producto): void {
 
+    const cantidadEnCarrito = this.carritoService.obtenerCantidad(producto.id);
+
+    if (cantidadEnCarrito >= producto.stock) {
+
+      alert(`Solo hay ${producto.stock} unidades disponibles.`);
+
+      return;
+
+    }
+
     this.carritoService.agregarProducto(producto.id, 1);
 
     this.carritoApiService
-        .obtenerCarrito()
-        .subscribe({
+      .obtenerCarrito()
+      .subscribe({
 
-            next: (respuesta) => {
+        next: (respuesta) => {
 
-                console.log("Respuesta backend:", respuesta);
+          console.log("Respuesta backend:", respuesta);
 
-            },
+        },
 
-            error: (error) => {
+        error: (error) => {
 
-                console.error(error);
+          console.error(error);
 
-            }
+        }
 
-        });
+      });
 
   }
 

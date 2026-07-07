@@ -10,6 +10,8 @@ import {ProductosListaComponent} from "./productos-listar/productos-listar.compo
 import { CommonModule } from '@angular/common';
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +21,8 @@ import { CarritoComponent } from './carrito/carrito.component';
     NavbarComponent,
     ProductosListaComponent,
     ProductoDetalleComponent,
-    CarritoComponent
+    CarritoComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { CarritoComponent } from './carrito/carrito.component';
     FormsModule,
     FooterComponent,
     CommonModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi())

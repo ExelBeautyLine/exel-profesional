@@ -2,13 +2,15 @@ import { Producto, Cuota } from '../productos-listar/Producto';
 
 export interface ItemCarritoDetalle {
 
-    producto: Producto;
+    producto: any;
 
     cantidad: number;
 
     subtotalTarjeta: number;
 
     subtotalTransferencia: number;
+
+    sinStock: boolean;
 
 }
 
