@@ -4,6 +4,7 @@ import { ProductosListaComponent } from './productos-listar/productos-listar.com
 import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { GraciasComponent } from './gracias/gracias.component';
 
 const routes: Routes = [
     {
@@ -31,7 +32,11 @@ const routes: Routes = [
     path: 'checkout',
 
     component: CheckoutComponent
-}
+    },
+    {
+    path: "gracias",
+    component: GraciasComponent
+    }
 
 
 ];

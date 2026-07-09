@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { PedidoService } from './pedido.service';
 import { CarritoService } from '../carrito/carrito.service';
+import { Router } from '@angular/router';
 
 @Component({
 
@@ -29,7 +30,8 @@ export class CheckoutComponent implements OnInit {
         private checkoutService: CheckoutService,
         private fb: FormBuilder,
         private pedidoService: PedidoService,
-        private carritoService: CarritoService
+        private carritoService: CarritoService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -173,12 +175,19 @@ export class CheckoutComponent implements OnInit {
                 next: (respuesta) => {
 
                     console.log("Pedido creado:", respuesta);
-                    
+
                     this.carritoService.vaciar();
 
                     if (respuesta.pago === "transferencia") {
 
-                        console.log("Abrir WhatsApp");
+                        window.open(
+                            respuesta.whatsapp,
+                            "_blank"
+                        );
+
+                        this.router.navigate([
+                            '/gracias'
+                        ]);
 
                     } else {
 

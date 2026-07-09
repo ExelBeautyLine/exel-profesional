@@ -1,6 +1,8 @@
 import { pool } from "./db";
 import { calcularResumen, ItemCarrito } from "./calcular-resumen";
 import { PoolClient } from "pg";
+import { generarMensajeWhatsapp } from "./whatsapp-manager";
+import { enviarMailCliente,enviarMailAdministrador } from "./mail-manager";
 
 export interface CrearPedidoRequest {
 
@@ -423,7 +425,7 @@ export async function crearPedido(
             pedidoId,
 
             resumen,
-            
+
             body.pago
 
         );
@@ -436,6 +438,31 @@ export async function crearPedido(
 
         );
         await client.query("COMMIT");
+
+        await enviarMailAdministrador(
+
+            pedidoId
+
+        );
+
+        await enviarMailCliente(
+
+            pedidoId,
+
+            body.cliente.email
+
+        );
+
+        const mensajeWhatsapp = generarMensajeWhatsapp(
+
+            pedidoId,
+
+            body,
+
+            resumen
+
+        );
+
 
         return {
 
@@ -451,7 +478,11 @@ export async function crearPedido(
 
             pago: body.pago,
 
-            entrega: body.entrega
+            entrega: body.entrega,
+
+            whatsapp:
+
+                `https://wa.me/5492262616955?text=${mensajeWhatsapp}`
 
         };
 
