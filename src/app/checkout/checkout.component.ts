@@ -190,7 +190,7 @@ export class CheckoutComponent implements OnInit {
 
                     } else {
 
-                        console.log("Ir a Mercado Pago");
+                        window.location.href = respuesta.mercadoPago;
 
                     }
 

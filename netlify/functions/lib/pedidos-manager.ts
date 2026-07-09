@@ -3,6 +3,7 @@ import { calcularResumen, ItemCarrito } from "./calcular-resumen";
 import { PoolClient } from "pg";
 import { generarMensajeWhatsapp } from "./whatsapp-manager";
 import { enviarMailCliente,enviarMailAdministrador } from "./mail-manager";
+import { crearPreferencia } from "./mercadopago-manager";
 
 export interface CrearPedidoRequest {
 
@@ -485,6 +486,22 @@ export async function crearPedido(
 
         );
 
+        let preferencia = null;
+
+        if (body.pago === "tarjeta") {
+
+            preferencia = await crearPreferencia(
+
+                pedidoId,
+
+                body,
+
+                resumen
+
+            );
+
+        }
+
 
         return {
 
@@ -504,7 +521,11 @@ export async function crearPedido(
 
             whatsapp:
 
-                `https://wa.me/5492262616955?text=${mensajeWhatsapp}`
+                `https://wa.me/5492262616955?text=${mensajeWhatsapp}`,
+            
+            mercadoPago:
+
+            preferencia?.init_point ?? null
 
         };
 
