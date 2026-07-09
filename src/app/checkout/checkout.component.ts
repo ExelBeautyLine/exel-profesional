@@ -174,19 +174,18 @@ export class CheckoutComponent implements OnInit {
 
                 next: (respuesta) => {
 
-                    console.log("Pedido creado:", respuesta);
+                    console.log("Respuesta completa:");
+
+                    console.log(respuesta);
 
                     this.carritoService.vaciar();
 
                     if (respuesta.pago === "transferencia") {
 
-                        window.open(
-                            respuesta.whatsapp,
-                            "_blank"
-                        );
-
+                        window.location.href = respuesta.whatsapp;
+                        
                         this.router.navigate([
-                            '/gracias'
+                           '/gracias'
                         ]);
 
                     } else {

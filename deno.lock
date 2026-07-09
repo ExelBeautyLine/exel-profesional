@@ -37,6 +37,7 @@
         "npm:karma-jasmine@5.1",
         "npm:karma@6.4",
         "npm:pg@^8.22.0",
+        "npm:resend@^6.17.2",
         "npm:rxjs@7.8",
         "npm:tslib@^2.3.0",
         "npm:typescript@~5.7.2",

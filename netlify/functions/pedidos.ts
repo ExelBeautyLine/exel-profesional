@@ -8,6 +8,7 @@ export const handler: Handler = async (event) => {
 
     const pedido = await crearPedido(body);
 
+    console.log("Pedido :", pedido);
     return {
 
         statusCode: 200,

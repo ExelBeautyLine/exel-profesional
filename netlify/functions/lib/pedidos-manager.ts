@@ -168,7 +168,13 @@ async function crearPedidoDB(
 
     resumen: Awaited<ReturnType<typeof calcularResumen>>
 
-): Promise<number> {
+): Promise<{
+
+    id: number;
+
+    fecha: Date;
+
+ }> {
 
     const tipoPrecioId =
         body.pago === "transferencia"
@@ -215,7 +221,7 @@ async function crearPedidoDB(
 
         )
 
-        RETURNING id`,
+        RETURNING id,fecha`,
 
         [
 
@@ -241,7 +247,13 @@ async function crearPedidoDB(
 
     );
 
-    return result.rows[0].id;
+    return {
+
+        id: result.rows[0].id,
+
+        fecha: result.rows[0].fecha
+
+    };
 
 }
 
@@ -402,7 +414,7 @@ export async function crearPedido(
 
         console.log("Dirección:", direccionId);
 
-        const pedidoId = await crearPedidoDB(
+        const pedido = await crearPedidoDB(
 
             client,
 
@@ -414,7 +426,9 @@ export async function crearPedido(
 
             resumen
 
-        );
+          );
+        
+        const pedidoId = pedido.id;
 
         console.log("Pedido:", pedidoId);
 
@@ -441,7 +455,13 @@ export async function crearPedido(
 
         await enviarMailAdministrador(
 
-            pedidoId
+            pedidoId,
+
+            pedido.fecha,
+            
+            body,
+
+            resumen
 
         );
 
@@ -449,7 +469,9 @@ export async function crearPedido(
 
             pedidoId,
 
-            body.cliente.email
+            body,
+
+            resumen
 
         );
 
