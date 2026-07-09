@@ -159,6 +159,12 @@ export class CarritoService {
 
   }
 
+  vaciar(): void {
 
+    this.items = [];
+
+    this.guardar();
+
+  }
 
 }

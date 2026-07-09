@@ -12,13 +12,13 @@
 
             <div class="grid">
 
-                <input type="text" placeholder="Nombre">
+                <input type="text" placeholder="Nombre" formControlName="nombre">
 
-                <input type="text" placeholder="Apellido">
+                <input type="text" placeholder="Apellido" formControlName="apellido">
 
-                <input type="email" placeholder="Email">
+                <input type="email" placeholder="Email" formControlName="email">
 
-                <input type="text" placeholder="Teléfono">
+                <input type="text" placeholder="Teléfono" formControlName="telefono">
 
             </div>
 
@@ -186,8 +186,7 @@
                 pagando por transferencia.
 
             </div>
-            <button class="btn-continuar"
-                    (click)="continuar()">
+            <button class="btn-continuar" (click)="continuar()">
 
                 {{ formaPago === 'tarjeta'
                 ? 'Pagar con Mercado Pago'

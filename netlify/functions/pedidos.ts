@@ -1,22 +1,18 @@
 import { Handler } from "@netlify/functions";
 
+import { crearPedido } from "./lib/pedidos-manager";
+
 export const handler: Handler = async (event) => {
 
     const body = JSON.parse(event.body ?? "{}");
 
-    console.log("Pedido recibido:");
-
-    console.dir(body, { depth: null });
+    const pedido = await crearPedido(body);
 
     return {
 
         statusCode: 200,
 
-        body: JSON.stringify({
-
-            ok: true
-
-        })
+        body: JSON.stringify(pedido)
 
     };
 

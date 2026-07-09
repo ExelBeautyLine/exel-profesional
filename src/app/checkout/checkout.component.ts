@@ -132,25 +132,33 @@ export class CheckoutComponent implements OnInit {
 
             },
 
-            direccion: {
+            direccion:
 
-                provincia: this.form.value.provincia,
+                this.form.value.entrega === 'envio'
 
-                localidad: this.form.value.localidad,
+                    ? {
 
-                codigoPostal: this.form.value.codigoPostal,
+                        provincia: this.form.value.provincia,
 
-                calle: this.form.value.calle,
+                        localidad: this.form.value.localidad,
 
-                numero: this.form.value.numero,
+                        codigoPostal: this.form.value.codigoPostal,
 
-                piso: this.form.value.piso,
+                        calle: this.form.value.calle,
 
-                departamento: this.form.value.departamento,
+                        numero: this.form.value.numero,
 
-                observaciones: this.form.value.observaciones
+                        piso: this.form.value.piso,
 
-            },
+                        departamento: this.form.value.departamento,
+
+                        observaciones: this.form.value.observaciones
+
+                    }
+
+                    : null,
+
+
 
             entrega: this.form.value.entrega,
 
@@ -165,6 +173,18 @@ export class CheckoutComponent implements OnInit {
                 next: (respuesta) => {
 
                     console.log("Pedido creado:", respuesta);
+                    
+                    this.carritoService.vaciar();
+
+                    if (respuesta.pago === "transferencia") {
+
+                        console.log("Abrir WhatsApp");
+
+                    } else {
+
+                        console.log("Ir a Mercado Pago");
+
+                    }
 
                 },
 
