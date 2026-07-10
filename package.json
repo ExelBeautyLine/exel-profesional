@@ -1,5 +1,5 @@
 {
-  "name": "suplementos-jo",
+  "name": "exel-profesional",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:suplementos-jo": "node dist/suplementos-jo/server/server.mjs"
+    "serve:ssr:exel-profesional": "node dist/exel-profesional/server/server.mjs"
   },
   "private": true,
   "dependencies": {

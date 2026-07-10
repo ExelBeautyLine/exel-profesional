@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "suplementos-jo": {
+    "exel-profesional": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/suplementos-jo",
+            "outputPath": "dist/exel-profesional",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -78,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "suplementos-jo:build:production"
+              "buildTarget": "exel-profesional:build:production"
             },
             "development": {
-              "buildTarget": "suplementos-jo:build:development"
+              "buildTarget": "exel-profesional:build:development"
             }
           },
           "defaultConfiguration": "development"
