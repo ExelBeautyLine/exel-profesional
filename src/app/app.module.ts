@@ -33,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    provideClientHydration(withEventReplay())
   ],
   bootstrap: [AppComponent]
 })
