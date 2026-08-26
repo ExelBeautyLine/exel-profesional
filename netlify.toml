@@ -2,3 +2,30 @@
   command = "npm run build"
   publish = "dist/exel-profesional/browser"
   functions = "netlify/functions"
+
+# Permite entrar directamente a las rutas manejadas por Angular, sin interferir
+# con las rutas de las Netlify Functions.
+[[redirects]]
+  from = "/productos"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/productos/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/carrito"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/gracias"
+  to = "/index.html"
+  status = 200
