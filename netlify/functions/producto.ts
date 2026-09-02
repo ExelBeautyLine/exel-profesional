@@ -24,9 +24,21 @@ const slug = event.queryStringParameters?.['slug'];
 
 
     const result = await pool.query(`
-      SELECT *
-      FROM productos
-      WHERE slug = $1;
+      SELECT
+        p.*,
+        EXISTS (
+          SELECT 1
+          FROM producto_subcategoria ps
+          INNER JOIN subcategorias s ON s.id = ps.subcategoria_id
+          INNER JOIN categorias c ON c.id = s.categorias_id
+          WHERE ps.producto_id = p.id
+            AND (
+              LOWER(c.nombre) LIKE '%capilar%'
+              OR LOWER(s.nombre) LIKE '%capilar%'
+            )
+        ) AS es_capilar
+      FROM productos p
+      WHERE p.slug = $1;
     `, [slug]);
 
    const producto = result.rows[0];

@@ -63,7 +63,7 @@
         <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>Beneficios</h2><p>{{ producto.beneficios }}</p></div>
       </article>
       <article class="detalle-item" *ngIf="tieneContenido(producto.tipo_piel)">
-        <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>Tipo de piel</h2><p>{{ producto.tipo_piel }}</p></div>
+        <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>{{ etiquetaTipo }}</h2><p>{{ producto.tipo_piel }}</p></div>
       </article>
       <article class="detalle-item" *ngIf="tieneContenido(producto.modo_uso)">
         <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>Modo de uso</h2><p>{{ producto.modo_uso }}</p></div>

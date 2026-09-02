@@ -86,6 +86,10 @@ export class ProductoDetalleComponent implements OnInit {
     return cuotas[2] ?? cuotas[cuotas.length - 1] ?? null;
   }
 
+  get etiquetaTipo(): string {
+    return this.producto?.es_capilar ? 'Tipo de cabello' : 'Tipo de piel';
+  }
+
   disminuirCantidad(): void {
     this.cantidad = Math.max(1, this.cantidad - 1);
   }

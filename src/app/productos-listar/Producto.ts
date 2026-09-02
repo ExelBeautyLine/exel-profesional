@@ -23,6 +23,7 @@ export interface Producto {
     activo: boolean;
     slug: String;
     cantidad_imagenes: number;
+    es_capilar?: boolean;
     precio: {
         base: number;
         final: number;
