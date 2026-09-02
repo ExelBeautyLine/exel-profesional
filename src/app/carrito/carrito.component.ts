@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoApiService } from './carrito-api-service';
 
 import { CarritoService } from './carrito.service';
+import { NotificacionesService } from '../notificaciones/notificaciones.service';
 import {
     ItemCarritoDetalle,
     RespuestaCarrito
@@ -23,7 +24,8 @@ export class CarritoComponent implements OnInit {
     constructor(
 
         private carritoApiService: CarritoApiService,
-        private carritoService: CarritoService
+        private carritoService: CarritoService,
+        private notificaciones: NotificacionesService
 
     ) { }
 
@@ -63,7 +65,10 @@ export class CarritoComponent implements OnInit {
 
          if (item.cantidad >= item.producto.stock) {
 
-            alert(`Solo hay ${item.producto.stock} unidades disponibles.`);
+            this.notificaciones.mostrar(
+                `Solo hay ${item.producto.stock} unidades disponibles.`,
+                'advertencia'
+            );
 
             return;
 

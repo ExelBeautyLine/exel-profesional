@@ -1,0 +1,12 @@
+.notificaciones { position: fixed; top: 18px; right: 18px; z-index: 5000; display: grid; width: min(390px, calc(100vw - 32px)); gap: 10px; pointer-events: none; }
+.notificacion { display: grid; grid-template-columns: 30px 1fr 26px; align-items: center; gap: 10px; padding: 13px 11px 13px 13px; border: 1px solid #dce4d4; border-radius: 8px; background: #fff; box-shadow: 0 12px 30px rgba(0, 0, 0, .16); color: #263027; pointer-events: auto; animation: aparecer .25s ease-out; }
+.notificacion-icono { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: #718d2d; color: #fff; font-size: 14px; font-weight: 800; }
+.notificacion p { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.4; }
+.notificacion button { width: 26px; height: 26px; border: 0; border-radius: 4px; background: transparent; color: #7a8178; cursor: pointer; font-size: 18px; line-height: 1; }
+.notificacion button:hover { background: #f1f3ee; color: #263027; }
+.notificacion--advertencia { border-color: #ead7ae; }
+.notificacion--advertencia .notificacion-icono { background: #b57d24; }
+.notificacion--error { border-color: #ebc6c6; }
+.notificacion--error .notificacion-icono { background: #ad3f3f; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) { .notificaciones { top: 12px; right: 12px; width: calc(100vw - 24px); } }

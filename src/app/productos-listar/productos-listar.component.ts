@@ -4,6 +4,7 @@ import { Producto } from './Producto';
 import { ProductosService } from '../services/productos-services';
 import { CarritoService } from '../carrito/carrito.service';
 import { CarritoApiService } from '../carrito/carrito-api-service';
+import { NotificacionesService } from '../notificaciones/notificaciones.service';
 
 @Component({
   selector: 'app-productos-listar',
@@ -21,7 +22,8 @@ export class ProductosListaComponent implements OnInit {
     private productosDataService: ProductosService,
     private route: ActivatedRoute,
     private carritoService: CarritoService,
-    private carritoApiService: CarritoApiService
+    private carritoApiService: CarritoApiService,
+    private notificaciones: NotificacionesService
   ) { }
 
   ngOnInit(): void {
@@ -67,7 +69,10 @@ export class ProductosListaComponent implements OnInit {
 
     if (cantidadEnCarrito >= producto.stock) {
 
-      alert(`Solo hay ${producto.stock} unidades disponibles.`);
+      this.notificaciones.mostrar(
+        `Solo hay ${producto.stock} unidades disponibles.`,
+        'advertencia'
+      );
 
       return;
 

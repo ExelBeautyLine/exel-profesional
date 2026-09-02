@@ -17,6 +17,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { PanelComponent } from './admin/panel/panel.component';
 import { PromocionesComponent } from './admin/promociones/promociones.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 
 registerLocaleData(localeEsAr);
 
@@ -40,6 +41,7 @@ registerLocaleData(localeEsAr);
     AppRoutingModule,
     FormsModule,
     FooterComponent,
+    NotificacionesComponent,
     CommonModule,
     ReactiveFormsModule
   ],
