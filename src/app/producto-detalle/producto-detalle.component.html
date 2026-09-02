@@ -1,176 +1,73 @@
 <section class="detalle-page" *ngIf="producto">
+  <nav class="breadcrumb" aria-label="Navegación de producto">
+    <a routerLink="/">Inicio</a><span aria-hidden="true">/</span><a routerLink="/productos">Productos</a><span aria-hidden="true">/</span><span>{{ producto.nombre }}</span>
+  </nav>
 
-    <div class="detalle-top">
-
-        <!-- MINIATURAS -->
-
-        <div class="thumbs">
-
-            <img
-                *ngFor="let img of imagenes"
-                [src]="img"
-                [class.active]="img === imagenSeleccionada"
-                (click)="imagenSeleccionada = img">
-
-        </div>
-
-        <!-- IMAGEN -->
-
-        <div class="imagen-principal">
-
-            <img
-                [src]="imagenSeleccionada"
-                [alt]="producto.nombre">
-
-        </div>
-
-        <!-- INFORMACIÓN -->
-
-        <div class="info">
-
-            <div class="breadcrumb">
-
-                Inicio /
-                {{producto.nombre}}
-
-            </div>
-
-            <h1>
-
-                {{producto.nombre}}
-
-            </h1>
-
-            <div class="precio-container">
-
-                <div *ngIf="producto.precio.descuento > 0" class="precio-anterior">
-                    {{producto.precio.base | currency:'ARS':'symbol':'1.2-2'}}
-                </div>
-
-                <div class="precio" [class.precio-oferta]="producto.precio.descuento > 0">
-                    {{producto.precio.final | currency:'ARS':'symbol':'1.2-2'}}
-                </div>
-
-                <div *ngIf="producto.precio.descuento > 0" class="descuento">
-                    {{producto.precio.descuento}}% OFF
-                </div>
-
-            </div>
-
-            <div class="transferencia">
-
-                {{producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2'}}
-
-                con Transferencia
-
-            </div>
-
-            <div
-                class="cuotas"
-                *ngIf="producto.precio.cuotas.length">
-
-                {{producto.precio.cuotas[2].cantidad}}
-                cuotas sin interés de
-
-                {{
-                    producto.precio.cuotas[2].valorCuota
-                    | currency:'ARS':'symbol':'1.2-2'
-                }}
-
-            </div>
-
-            <div class="stock">
-
-                {{producto.stock}}
-
-                en stock
-
-            </div>
-
-            <div class="presentacion">
-
-                Tamaño
-
-                <button>
-
-                    {{producto.presentacion}}
-
-                </button>
-
-            </div>
-
-            <div class="cantidad">
-
-                <button>-</button>
-
-                <input
-                    type="text"
-                    value="1">
-
-                <button>+</button>
-
-            </div>
-
-            <button class="comprar">
-
-                Agregar al carrito
-
-            </button>
-
-        </div>
-
+  <div class="detalle-top">
+    <!-- Se conserva la misma galería y las mismas rutas de imágenes. -->
+    <div class="thumbs" *ngIf="imagenes.length > 1" aria-label="Imágenes del producto">
+      <img *ngFor="let img of imagenes; let indice = index" [src]="img" [alt]="producto.nombre + ' - imagen ' + (indice + 1)" [class.active]="img === imagenSeleccionada" (click)="imagenSeleccionada = img" (keydown.enter)="imagenSeleccionada = img" (keydown.space)="imagenSeleccionada = img" tabindex="0" role="button">
     </div>
 
-    <section class="descripcion">
+    <div class="imagen-principal">
+      <span *ngIf="producto.precio.descuento > 0" class="badge-oferta">{{ producto.precio.descuento }}% OFF</span>
+      <img [src]="imagenSeleccionada" [alt]="producto.nombre">
+    </div>
 
-        <h2>
+    <div class="info">
+      <span class="codigo" *ngIf="tieneContenido(producto.codigo)">Código {{ producto.codigo }}</span>
+      <h1>{{ producto.nombre }}</h1>
 
-            Descripción
+      <div class="precio-container" aria-label="Precio del producto">
+        <div *ngIf="producto.precio.descuento > 0" class="precio-anterior">{{ producto.precio.base | currency:'ARS':'symbol':'1.2-2' }}</div>
+        <div class="precio" [class.precio-oferta]="producto.precio.descuento > 0">{{ producto.precio.final | currency:'ARS':'symbol':'1.2-2' }}</div>
+        <span *ngIf="producto.precio.descuento > 0" class="descuento">{{ producto.precio.descuento }}% OFF</span>
+      </div>
 
-        </h2>
+      <p class="transferencia"><strong>{{ producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2' }}</strong> con transferencia</p>
+      <p class="cuotas" *ngIf="cuotaPrincipal as cuota">Hasta <strong>{{ cuota.cantidad }} cuotas sin interés</strong> de {{ cuota.valorCuota | currency:'ARS':'symbol':'1.2-2' }}</p>
 
-        <p>
+      <div class="disponibilidad" [class.sin-stock]="producto.stock <= 0">
+        <span class="estado-stock"></span>{{ producto.stock > 0 ? 'Stock disponible' : 'Sin stock' }}
+        <small *ngIf="producto.stock > 0">{{ producto.stock }} unidades disponibles</small>
+      </div>
 
-            {{producto.descripcion}}
+      <div class="presentacion" *ngIf="tieneContenido(producto.presentacion)">
+        <span>Presentación</span><strong>{{ producto.presentacion }}</strong>
+      </div>
 
-        </p>
+      <div class="ingredientes-resumen" *ngIf="tieneContenido(producto.ingredientes_activos)">
+        <span>Ingredientes activos</span>
+        <p>{{ producto.ingredientes_activos }}</p>
+      </div>
 
-        <h3>
+      <div class="compra-box">
+        <div class="cantidad" aria-label="Cantidad de unidades">
+          <button type="button" aria-label="Disminuir cantidad" (click)="disminuirCantidad()" [disabled]="cantidad <= 1">−</button>
+          <input type="number" [(ngModel)]="cantidad" (change)="corregirCantidad()" min="1" [max]="producto.stock" aria-label="Cantidad">
+          <button type="button" aria-label="Aumentar cantidad" (click)="aumentarCantidad()" [disabled]="cantidad >= producto.stock">+</button>
+        </div>
+        <button type="button" class="comprar" (click)="agregarAlCarrito()" [disabled]="producto.stock <= 0">{{ producto.stock > 0 ? 'Agregar al carrito' : 'Producto sin stock' }}</button>
+      </div>
+      <p class="compra-segura">Compra segura · Pagá como prefieras</p>
+    </div>
+  </div>
 
-            Ingredientes activos
+  <section class="ficha-producto" aria-label="Información del producto">
+    <article class="detalle-descripcion" *ngIf="tieneContenido(producto.descripcion)">
+      <h2>Descripción</h2><p>{{ producto.descripcion }}</p>
+    </article>
 
-        </h3>
-
-        <p>
-
-            {{producto.ingredientes_activos}}
-
-        </p>
-
-        <h3>
-
-            Beneficios
-
-        </h3>
-
-        <p>
-
-            {{producto.beneficios}}
-
-        </p>
-
-        <h3>
-
-            Modo de uso
-
-        </h3>
-
-        <p>
-
-            {{producto.modo_uso}}
-
-        </p>
-
-    </section>
-
+    <div class="detalle-grid" *ngIf="tieneInformacionAdicional">
+      <article class="detalle-item" *ngIf="tieneContenido(producto.beneficios)">
+        <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>Beneficios</h2><p>{{ producto.beneficios }}</p></div>
+      </article>
+      <article class="detalle-item" *ngIf="tieneContenido(producto.tipo_piel)">
+        <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>Tipo de piel</h2><p>{{ producto.tipo_piel }}</p></div>
+      </article>
+      <article class="detalle-item" *ngIf="tieneContenido(producto.modo_uso)">
+        <span class="detalle-icono" aria-hidden="true">✦</span><div><h2>Modo de uso</h2><p>{{ producto.modo_uso }}</p></div>
+      </article>
+    </div>
+  </section>
 </section>

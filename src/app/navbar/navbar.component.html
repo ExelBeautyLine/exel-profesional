@@ -45,7 +45,7 @@
       <li *ngFor="let categoria of menu" (mouseenter)="categoria.open = true" (mouseleave)="categoria.open = false">
 
         <a
-          [routerLink]="['/productos/categoria', categoria.slug]"
+          [routerLink]="['/productos/categoria', identificadorCategoria(categoria)]"
           (click)="abrirCategoria(categoria)"
         >
           {{ categoria.nombre }}
@@ -60,10 +60,6 @@
           </li>
 
         </ul>
-      </li>
-
-      <li>
-        <a [routerLink]="['/productos']" (click)="cerrarMenu()">Mas Vendidos</a>
       </li>
 
     </ul>

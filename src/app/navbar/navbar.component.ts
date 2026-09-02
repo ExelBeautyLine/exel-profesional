@@ -43,6 +43,15 @@ export class NavbarComponent implements OnInit {
     this.menuOpen = true;
   }
 
+  identificadorCategoria(categoria: any): string | number {
+    const slug = typeof categoria?.slug === 'string'
+      ? categoria.slug.trim()
+      : '';
+
+    // Algunas categorías antiguas no tienen slug. El id evita formar /categoria/null.
+    return slug || categoria.id;
+  }
+
   cerrarMenu(): void {
     this.menuOpen = false;
     this.cerrarSubmenus();

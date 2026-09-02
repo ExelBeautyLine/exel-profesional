@@ -1,265 +1,91 @@
-.detalle-page{
+:host { display: block; color: #273020; }
 
-    max-width:1400px;
-    margin:auto;
-    padding:40px 20px;
+.detalle-page { width: min(1440px, 100%); margin: 0 auto; padding: 34px 28px 88px; }
+.breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; color: #7b8174; font-size: 13px; }
+.breadcrumb a { color: inherit; text-decoration: none; }
+.breadcrumb a:hover { color: #607a24; }
+.breadcrumb span:last-child { color: #343b30; }
 
+.detalle-top { display: grid; grid-template-columns: 84px minmax(360px, 650px) minmax(310px, 1fr); align-items: start; gap: clamp(20px, 3vw, 52px); }
+.thumbs { display: flex; flex-direction: column; gap: 12px; }
+.thumbs img { width: 76px; aspect-ratio: 1; display: block; border: 1px solid #e2e5dd; border-radius: 10px; object-fit: cover; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease; }
+.thumbs img:hover, .thumbs img.active { border-color: #718d2d; box-shadow: 0 0 0 2px rgba(113, 141, 45, .15); }
+.thumbs img:focus-visible { outline: 2px solid #718d2d; outline-offset: 3px; }
+
+.imagen-principal { position: relative; overflow: hidden; border: 1px solid #edf0e9; border-radius: 18px; background: #f8f9f6; }
+.imagen-principal img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.badge-oferta, .descuento { display: inline-flex; align-items: center; border-radius: 999px; background: #718d2d; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.badge-oferta { position: absolute; z-index: 1; top: 18px; left: 18px; padding: 8px 12px; }
+
+.info { padding: 6px 0; }
+.codigo { display: block; margin-bottom: 12px; color: #7e8677; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.info h1 { margin: 0 0 24px; color: #222a1e; font-size: clamp(30px, 3vw, 44px); font-weight: 600; letter-spacing: -.035em; line-height: 1.08; }
+.precio-container { display: flex; flex-wrap: wrap; align-items: center; gap: 9px 12px; }
+.precio { color: #20281d; font-size: clamp(34px, 3vw, 46px); font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+.precio-oferta { color: #647e28; }
+.precio-anterior { color: #8a9185; font-size: 17px; text-decoration: line-through; }
+.descuento { padding: 6px 10px; }
+.transferencia { margin: 14px 0 5px; color: #4e5c3e; font-size: 16px; }
+.transferencia strong { color: #607a24; }
+.cuotas { margin: 0; color: #697064; font-size: 14px; line-height: 1.55; }
+.cuotas strong { color: #4b5f20; }
+
+.disponibilidad { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 27px; color: #3f5a20; font-size: 14px; font-weight: 650; }
+.estado-stock { width: 8px; height: 8px; border-radius: 50%; background: #719637; }
+.disponibilidad small { width: 100%; margin-left: 15px; color: #7a8174; font-size: 12px; font-weight: 400; }
+.disponibilidad.sin-stock { color: #a34d3a; }
+.sin-stock .estado-stock { background: #bc5943; }
+
+.presentacion { display: flex; flex-direction: column; gap: 7px; margin-top: 25px; padding-top: 22px; border-top: 1px solid #e5e9e1; color: #70786a; font-size: 13px; }
+.presentacion strong { width: fit-content; padding: 8px 13px; border: 1px solid #cad5bc; border-radius: 8px; color: #344126; font-size: 14px; font-weight: 600; }
+.ingredientes-resumen { margin-top: 18px; color: #70786a; font-size: 13px; }
+.ingredientes-resumen p { margin: 7px 0 0; color: #4f5d44; font-size: 14px; line-height: 1.55; white-space: pre-line; }
+.compra-box { display: flex; gap: 12px; margin-top: 24px; }
+.cantidad { display: flex; height: 52px; border: 1px solid #dce2d5; border-radius: 9px; overflow: hidden; }
+.cantidad button, .cantidad input { border: 0; background: #fff; text-align: center; }
+.cantidad button { width: 42px; color: #536534; cursor: pointer; font-size: 22px; transition: background .2s ease; }
+.cantidad button:hover:not(:disabled) { background: #f1f5eb; }
+.cantidad button:disabled { color: #b6beb0; cursor: not-allowed; }
+.cantidad input { width: 38px; appearance: textfield; color: #26301e; font-weight: 700; }
+.cantidad input::-webkit-inner-spin-button, .cantidad input::-webkit-outer-spin-button { margin: 0; appearance: none; }
+.comprar { min-height: 52px; flex: 1; border: 0; border-radius: 9px; background: #718d2d; color: #fff; cursor: pointer; font-size: 15px; font-weight: 700; transition: background .2s ease, box-shadow .2s ease, transform .2s ease; }
+.comprar:hover:not(:disabled) { background: #5e7724; box-shadow: 0 6px 16px rgba(73, 95, 31, .22); transform: translateY(-1px); }
+.comprar:disabled { background: #b0b9a7; cursor: not-allowed; }
+.comprar:focus-visible, .cantidad button:focus-visible, .cantidad input:focus-visible { outline: 2px solid #607a24; outline-offset: 2px; }
+.compra-segura { margin: 14px 0 0; color: #818a78; font-size: 12px; text-align: center; }
+
+.ficha-producto { margin-top: 76px; border-top: 1px solid #e4e9df; padding-top: 48px; }
+.detalle-descripcion { max-width: 840px; }
+.detalle-descripcion h2, .detalle-item h2 { margin: 0 0 12px; color: #2a3421; font-size: 22px; font-weight: 650; letter-spacing: -.02em; }
+.detalle-descripcion p, .detalle-item p { margin: 0; color: #596154; font-size: 15px; line-height: 1.8; white-space: pre-line; }
+.detalle-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 35px; }
+.detalle-item { display: flex; gap: 14px; min-width: 0; padding: 24px; border: 1px solid #e3e8dd; border-radius: 14px; background: #fbfcfa; }
+.detalle-item h2 { margin-bottom: 7px; font-size: 17px; }
+.detalle-icono { display: grid; flex: 0 0 28px; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: #eaf0de; color: #66832a; font-size: 14px; }
+
+@media (max-width: 1080px) {
+  .detalle-top { grid-template-columns: 72px minmax(0, 1fr); }
+  .info { grid-column: 1 / -1; width: min(650px, 100%); margin: 4px auto 0; }
 }
 
-.detalle-top{
-
-    display:grid;
-    grid-template-columns:100px 650px 1fr;
-    gap:35px;
-    align-items:start;
-
-}
-
-.thumbs{
-
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-
-}
-
-.thumbs img{
-
-    width:80px;
-    border:1px solid #ddd;
-    cursor:pointer;
-    transition:.2s;
-
-}
-
-.thumbs img:hover{
-
-    border-color:#97b04d;
-
-}
-
-.thumbs img.active{
-
-    border:2px solid #97b04d;
-
-}
-
-.imagen-principal{
-
-    border:1px solid #ececec;
-
-}
-
-.imagen-principal img{
-
-    width:100%;
-    display:block;
-
-}
-
-.info{
-
-    display:flex;
-    flex-direction:column;
-
-}
-
-.breadcrumb{
-
-    font-size:13px;
-    color:#888;
-    margin-bottom:15px;
-
-}
-
-.info h1{
-
-    font-size:40px;
-    line-height:1.2;
-    margin-bottom:25px;
-    font-weight:600;
-
-}
-
-.precio{
-
-    font-size:40px;
-    font-weight:700;
-
-}
-
-.precio-container {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.precio-anterior {
-    color: #888;
-    font-size: 20px;
-    text-decoration: line-through;
-}
-
-.precio-oferta {
-    color: #718c31;
-    font-size: 46px;
-}
-
-.transferencia{
-
-    color:#93af49;
-    font-size:22px;
-    margin-top:10px;
-
-}
-
-.cuotas{
-
-    margin-top:15px;
-    color:#777;
-
-}
-
-.descuento{
-
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: #718c31;
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-
-}
-
-.stock{
-
-    margin-top:25px;
-    font-size:15px;
-
-}
-
-.presentacion{
-
-    margin-top:30px;
-
-}
-
-.presentacion button{
-
-    margin-top:10px;
-    border:1px solid #bbb;
-    background:white;
-    padding:8px 18px;
-    cursor:pointer;
-
-}
-
-.cantidad{
-
-    display:flex;
-    margin-top:25px;
-
-}
-
-.cantidad button{
-
-    width:45px;
-    height:45px;
-    border:1px solid #ccc;
-    background:white;
-
-}
-
-.cantidad input{
-
-    width:60px;
-    border:1px solid #ccc;
-    text-align:center;
-
-}
-
-.comprar{
-
-    margin-top:25px;
-    height:55px;
-    border:none;
-    background:#97b04d;
-    color:white;
-    font-size:17px;
-    cursor:pointer;
-
-}
-
-.descripcion{
-
-    margin-top:70px;
-    max-width:900px;
-
-}
-
-.descripcion h2{
-
-    margin-bottom:20px;
-    font-size:28px;
-
-}
-
-.descripcion h3{
-
-    margin-top:35px;
-    margin-bottom:10px;
-
-}
-
-.descripcion p{
-
-    line-height:1.8;
-    color:#444;
-
-}
-
-@media(max-width:1100px){
-
-    .detalle-top{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .thumbs{
-
-        flex-direction:row;
-        order:2;
-
-    }
-
-}
-
-@media(max-width:1100px){
-  .thumbs { overflow-x:auto; padding-bottom:4px; }
-  .imagen-principal { order:1; width:100%; max-width:620px; margin:auto; }
-  .info { order:3; width:100%; max-width:620px; margin:auto; }
-}
-
-@media(max-width:600px){
-  .detalle-page { padding:22px 16px 45px; }
-  .detalle-top { gap:20px; }
-  .thumbs { gap:10px; }
-  .thumbs img { width:62px; flex:0 0 62px; }
-  .breadcrumb { margin-bottom:10px; font-size:12px; }
-  .info h1 { margin:0 0 16px; font-size:28px; line-height:1.2; }
-  .precio { font-size:30px; }
-  .precio-oferta { font-size:34px; }
-  .precio-anterior { font-size:16px; }
-  .transferencia { margin-top:7px; font-size:16px; }
-  .cuotas, .descuento { margin-top:10px; font-size:14px; }
-  .stock { margin-top:18px; }
-  .presentacion { margin-top:22px; }
-  .cantidad { margin-top:20px; }
-  .comprar { min-height:52px; margin-top:18px; }
-  .descripcion { margin-top:45px; }
-  .descripcion h2 { font-size:24px; }
-  .descripcion h3 { margin-top:28px; }
-  .descripcion p { font-size:15px; line-height:1.65; }
+@media (max-width: 640px) {
+  .detalle-page { padding: 23px 16px 55px; }
+  .breadcrumb { margin-bottom: 19px; font-size: 12px; }
+  .detalle-top { grid-template-columns: 1fr; gap: 13px; }
+  .thumbs { grid-row: 2; flex-direction: row; overflow-x: auto; padding: 3px 1px 8px; }
+  .thumbs img { width: 62px; flex: 0 0 62px; }
+  .imagen-principal { grid-row: 1; border-radius: 13px; }
+  .badge-oferta { top: 12px; left: 12px; padding: 6px 9px; font-size: 10px; }
+  .info { grid-column: auto; margin-top: 9px; }
+  .info h1 { margin-bottom: 18px; }
+  .precio { font-size: 34px; }
+  .precio-anterior { font-size: 15px; }
+  .compra-box { gap: 9px; }
+  .cantidad { height: 49px; }
+  .comprar { min-height: 49px; font-size: 14px; }
+  .ficha-producto { margin-top: 52px; padding-top: 34px; }
+  .detalle-descripcion h2 { font-size: 21px; }
+  .detalle-descripcion p, .detalle-item p { font-size: 14px; line-height: 1.7; }
+  .detalle-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 26px; }
+  .detalle-item { padding: 18px; }
 }

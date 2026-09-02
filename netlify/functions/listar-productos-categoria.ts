@@ -22,7 +22,7 @@ export const handler: Handler = async (event) => {
         INNER JOIN producto_subcategoria ps ON ps.producto_id = p.id
         INNER JOIN subcategorias s ON s.id = ps.subcategoria_id
         INNER JOIN categorias c ON c.id = s.categorias_id
-        WHERE c.slug = $1
+        WHERE c.slug = $1 OR CAST(c.id AS TEXT) = $1
         ORDER BY p.nombre
       `,
       [slug]
