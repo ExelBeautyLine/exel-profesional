@@ -1,0 +1,1021 @@
+/* =========================================================
+   INICIO
+   ========================================================= */
+
+.inicio {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #ffffff;
+  color: #222222;
+
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   CARRUSEL DE BENEFICIOS
+   ========================================================= */
+
+.beneficios {
+  position: relative;
+
+  width: 100%;
+  overflow: hidden;
+  background: #f5f5f5;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.beneficios-pista {
+  display: flex;
+  width: max-content;
+
+  animation: moverBeneficios 22s linear infinite;
+}
+
+.beneficios-grupo {
+  display: flex;
+  align-items: center;
+
+  min-width: 100vw;
+}
+
+.beneficios-grupo > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  flex: 1 0 auto;
+  padding: 15px clamp(18px, 3vw, 48px);
+
+  color: #333333;
+  font-size: 13px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.beneficio-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  font-size: 17px;
+}
+
+/* =========================================================
+   ANIMACIÓN BENEFICIOS
+   ========================================================= */
+
+/*
+  El movimiento recorre exactamente un grupo.
+  Como los dos grupos son idénticos, el reinicio
+  queda visualmente continuo.
+*/
+
+@keyframes moverBeneficios {
+
+   0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+}
+
+.beneficios:hover .beneficios-pista {
+  animation-play-state: paused;
+}
+
+
+/* =========================================================
+   FADE EN LOS EXTREMOS
+   ========================================================= */
+
+.beneficios::before,
+.beneficios::after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+
+  z-index: 10;
+
+  width: 25px;
+  height: 100%;
+
+}
+
+.beneficios::before {
+  left: 0;
+
+  background: linear-gradient(
+    to right,
+    #f5f5f5,
+    rgba(245, 245, 245, 0)
+  );
+}
+
+.beneficios::after {
+  right: 0;
+
+  background: linear-gradient(
+    to left,
+    #f5f5f5,
+    rgba(245, 245, 245, 0)
+  );
+}
+
+
+/* =========================================================
+   SECCIONES
+   ========================================================= */
+
+.seccion {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 42px 28px 0;
+
+  box-sizing: border-box;
+}
+
+.seccion-header {
+  display: flex;
+  align-items: flex-end;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+
+  color: #888888;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.seccion h2 {
+  margin: 0;
+
+  color: #1f1f1f;
+
+  font-size: 29px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   GRID PRODUCTOS
+   ========================================================= */
+
+.productos-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 24px 16px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.producto-card {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #cccccc;
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   LINK
+   ========================================================= */
+
+.producto-link {
+  display: block;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   IMAGEN
+   ========================================================= */
+
+.producto-imagen {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  background: #f6f6f6;
+
+  overflow: hidden;
+}
+
+.producto-imagen img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.producto-card:hover .producto-imagen img {
+  transform: scale(1.025);
+}
+
+
+/* =========================================================
+   BADGE
+   ========================================================= */
+
+.badge-offer {
+  position: absolute;
+
+  top: 9px;
+  left: 9px;
+
+  z-index: 3;
+
+  padding: 5px 9px;
+
+  background: #8ea84a;
+  color: #ffffff;
+
+  border-radius: 10px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   INFORMACIÓN
+   ========================================================= */
+
+.producto-info {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+}
+
+.producto-info h3 {
+  min-height: 38px;
+
+  margin: 0 0 6px;
+
+  color: #222222;
+
+  font-size: 17px;
+  font-weight: 500;
+
+  line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PRECIO
+   ========================================================= */
+
+.precio {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 5px;
+}
+
+.precio-anterior {
+  color: #999999;
+
+  font-size: 15px;
+
+  line-height: 1.2;
+
+  text-decoration: line-through;
+}
+
+.precio strong {
+  color: #718d2d;
+
+  /*
+    Mantengo el precio final como estaba.
+  */
+
+  font-size: 19px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   TRANSFERENCIA
+   ========================================================= */
+
+.transferencia {
+  margin: 5px 0 4px;
+
+  color: #333333;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   CUOTAS
+   ========================================================= */
+
+.cuotas {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  margin: 3px 0 9px;
+
+  color: #555555;
+
+  font-size: 13px;
+
+  line-height: 1.35;
+}
+
+.cuotas strong {
+  color: #718d2d;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cuotas-sin-interes {
+  color: #718d2d;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   BOTÓN COMPRAR
+   ========================================================= */
+
+.comprar {
+  align-self: flex-start;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  min-width: 76px;
+  height: 30px;
+
+  margin-top: auto;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border: none !important;
+  border-radius: 3px;
+
+  background: #718d2d !important;
+  color: #ffffff !important;
+
+  font-size: 10px !important;
+  font-weight: 600 !important;
+
+  line-height: 1 !important;
+
+  text-align: center;
+
+  text-decoration: none !important;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.comprar:hover {
+  background: #607a24 !important;
+  color: #ffffff !important;
+
+  transform: translateY(-1px);
+}
+
+.comprar:visited,
+.comprar:active,
+.comprar:focus {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+
+/* =========================================================
+   DESTACADOS
+   ========================================================= */
+
+.seccion-destacados {
+  margin-top: 50px;
+
+  padding-top: 42px;
+  padding-bottom: 70px;
+}
+
+
+/*
+  Gris Bison / gris cálido oscuro.
+*/
+
+.seccion-destacados .carrusel {
+  position: relative;
+
+  width: 100%;
+
+  padding: 26px 54px;
+
+  box-sizing: border-box;
+
+  background: #68605a;
+
+  border: 1px solid #57504b;
+  border-radius: 12px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
+   TRACK
+   ========================================================= */
+
+.carrusel-track {
+  display: flex;
+  align-items: stretch;
+
+  gap: 18px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+}
+
+.carrusel-track::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   CARDS DEL CARRUSEL
+   ========================================================= */
+
+.carrusel-track .producto-card {
+  flex: 0 0 calc(25% - 14px);
+
+  scroll-snap-align: start;
+}
+
+
+/* =========================================================
+   FLECHAS
+   ========================================================= */
+
+.carrusel-btn {
+  position: absolute;
+
+  top: 50%;
+  z-index: 10;
+
+  width: 42px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+
+  background: rgba(20, 20, 20, 0.48);
+  color: #ffffff;
+
+  font-size: 0;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   CHEVRON
+   ========================================================= */
+
+.carrusel-btn::before {
+  content: '';
+
+  width: 10px;
+  height: 10px;
+
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+}
+
+.carrusel-btn.prev::before {
+  transform: rotate(-135deg);
+
+  margin-left: 4px;
+}
+
+.carrusel-btn.next::before {
+  transform: rotate(45deg);
+
+  margin-right: 4px;
+}
+
+
+/* =========================================================
+   POSICIÓN
+   ========================================================= */
+
+.carrusel-btn.prev {
+  left: 8px;
+}
+
+.carrusel-btn.next {
+  right: 8px;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.carrusel-btn:hover {
+  background: #718d2d;
+
+  border-color: #718d2d;
+
+  transform:
+    translateY(-50%)
+    scale(1.04);
+
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   CLICK
+   ========================================================= */
+
+.carrusel-btn:active {
+  transform:
+    translateY(-50%)
+    scale(0.97);
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.carrusel-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   MENSAJES
+   ========================================================= */
+
+.mensaje,
+.sin-productos {
+  width: 100%;
+
+  padding: 30px 15px;
+
+  box-sizing: border-box;
+
+  color: #777777;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+.mensaje.error {
+  color: #9a2525;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .seccion {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .productos-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .carrusel-track .producto-card {
+    flex-basis:
+      calc(33.333% - 12px);
+  }
+
+}
+
+
+/* =========================================================
+   TABLET PEQUEÑA
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .seccion {
+    padding-top: 38px;
+  }
+
+  .seccion h2 {
+    font-size: 26px;
+  }
+
+  .productos-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .seccion-destacados .carrusel {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .carrusel-track .producto-card {
+    flex-basis:
+      calc(50% - 9px);
+  }
+
+}
+
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .beneficios {
+    min-height: 46px;
+  }
+
+  .beneficios-pista {
+    animation-duration: 12s;
+  }
+
+  .beneficios-grupo > span {
+    min-height: 46px;
+
+    padding-left: 18px;
+    padding-right: 18px;
+
+    font-size: 11px;
+  }
+
+  .beneficio-icono {
+    font-size: 15px;
+  }
+
+  .beneficios::before,
+  .beneficios::after {
+    width: 18px;
+  }
+
+
+  /* =========================
+     SECCIONES
+     ========================= */
+
+  .seccion {
+    padding: 30px 12px 0;
+  }
+
+  .seccion-header {
+    margin-bottom: 17px;
+  }
+
+  .eyebrow {
+    margin-bottom: 5px;
+
+    font-size: 9px;
+  }
+
+  .seccion h2 {
+    font-size: 21px;
+  }
+
+
+  /* =========================
+     GRID
+     ========================= */
+
+  .productos-grid {
+    gap: 18px 9px;
+  }
+
+
+  /* =========================
+     DESTACADOS
+     ========================= */
+
+  .seccion-destacados {
+    margin-top: 38px;
+
+    padding-top: 35px;
+    padding-bottom: 50px;
+  }
+
+  .seccion-destacados .carrusel {
+    padding: 12px;
+
+    border-radius: 10px;
+  }
+
+  .carrusel-track {
+    gap: 10px;
+  }
+
+  .carrusel-track .producto-card {
+    flex: 0 0 calc(50% - 5px);
+  }
+
+
+  /* =========================
+     FLECHAS
+     ========================= */
+
+  .carrusel-btn {
+    display: none;
+  }
+
+
+  /* =========================
+     CARDS
+     ========================= */
+
+  .producto-info {
+    padding: 10px;
+  }
+
+  .producto-info h3 {
+    min-height: 34px;
+
+    font-size: 11px;
+  }
+
+  .precio-anterior {
+    font-size: 10px;
+  }
+
+  .precio strong {
+    font-size: 17px;
+  }
+
+  .transferencia {
+    font-size: 9px;
+  }
+
+  .cuotas {
+    font-size: 9px;
+  }
+
+  .cuotas strong {
+    font-size: 10px;
+  }
+
+  .cuotas-sin-interes {
+    font-size: 9px;
+  }
+
+  .comprar {
+    min-width: 70px;
+
+    height: 29px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 9px !important;
+  }
+
+  .badge-offer {
+    top: 7px;
+    left: 7px;
+
+    padding: 4px 7px;
+
+    font-size: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   CELULAR MUY PEQUEÑO
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .seccion {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .seccion h2 {
+    font-size: 19px;
+  }
+
+  .productos-grid {
+    gap: 15px 8px;
+  }
+
+  .seccion-destacados .carrusel {
+    padding: 9px;
+  }
+
+  .carrusel-track {
+    gap: 8px;
+  }
+
+  .carrusel-track .producto-card {
+    flex-basis:
+      calc(50% - 4px);
+  }
+
+  .producto-info {
+    padding: 8px;
+  }
+
+  .producto-info h3 {
+    font-size: 10px;
+  }
+
+  .precio-anterior {
+    font-size: 9px;
+  }
+
+  .precio strong {
+    font-size: 16px;
+  }
+
+  .transferencia,
+  .cuotas {
+    font-size: 8px;
+  }
+
+  .cuotas strong {
+    font-size: 9px;
+  }
+
+  .comprar {
+    min-width: 66px;
+
+    height: 28px;
+
+    font-size: 8px !important;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  /*
+    Mantenemos el movimiento automático del ticker
+    porque es parte del diseño.
+  */
+
+  .beneficios-pista {
+    animation: moverBeneficios 22s linear infinite;
+  }
+
+  .carrusel-track {
+    scroll-behavior: auto;
+  }
+
+  .producto-card,
+  .producto-card:hover,
+  .producto-imagen img,
+  .comprar,
+  .carrusel-btn {
+    transition: none;
+  }
+
+}

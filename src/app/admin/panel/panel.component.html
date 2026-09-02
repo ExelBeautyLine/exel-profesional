@@ -1,0 +1,259 @@
+<div class="admin-container">
+
+    <div class="admin-header">
+
+        <div>
+            <h1>Panel de administración</h1>
+            <p>Productos</p>
+        </div>
+
+        <nav class="admin-nav">
+
+            <a routerLink="/admin">
+                Productos
+            </a>
+
+            <a routerLink="/admin/promociones">
+                Promociones
+            </a>
+
+        </nav>
+
+    </div>
+
+    <p *ngIf="mensaje" class="mensaje-exito">
+        {{ mensaje }}
+    </p>
+
+    <div *ngIf="cargando" class="mensaje">
+        Cargando productos...
+    </div>
+
+    <div *ngIf="error" class="mensaje error">
+        {{ error }}
+    </div>
+
+    <section *ngIf="!cargando && !error" class="filtros" aria-label="Filtros de productos">
+
+        <div class="campo-filtro busqueda-filtro">
+            <label for="busquedaProducto">Producto</label>
+            <input
+                id="busquedaProducto"
+                type="search"
+                placeholder="Nombre o código"
+                [(ngModel)]="busquedaProducto"
+            />
+        </div>
+
+        <div class="campo-filtro">
+            <label for="categoriaFiltro">Categoría</label>
+            <select
+                id="categoriaFiltro"
+                [(ngModel)]="categoriaFiltro"
+                (ngModelChange)="seleccionarCategoria()"
+            >
+                <option [ngValue]="null">Todas las categorías</option>
+                <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                    {{ categoria.nombre }}
+                </option>
+            </select>
+        </div>
+
+        <div class="campo-filtro">
+            <label for="subcategoriaFiltro">Subcategoría</label>
+            <select id="subcategoriaFiltro" [(ngModel)]="subcategoriaFiltro">
+                <option [ngValue]="null">Todas las subcategorías</option>
+                <option *ngFor="let subcategoria of subcategorias" [ngValue]="subcategoria.id">
+                    {{ subcategoria.nombre }}
+                </option>
+            </select>
+        </div>
+
+        <button type="button" class="limpiar-filtros" (click)="limpiarFiltros()">
+            Limpiar filtros
+        </button>
+
+    </section>
+
+    <p *ngIf="!cargando && !error" class="cantidad-resultados">
+        {{ productosFiltrados.length }} de {{ productos.length }} productos
+    </p>
+
+    <div *ngIf="!cargando && !error" class="productos-container">
+
+        <div class="producto" *ngFor="let producto of productosFiltrados">
+
+            <div class="producto-imagen">
+
+                <img *ngIf="producto.imagen_url" [src]="
+                    'assets/img/' +
+                    producto.imagen_url +
+                    '-0.jpg'
+                    " [alt]="producto.nombre" />
+
+            </div>
+
+            <div class="producto-info">
+
+                <span class="codigo">
+                    {{ producto.codigo }}
+                </span>
+
+                <h2>
+                    {{ producto.nombre }}
+                </h2>
+
+                <p *ngIf="producto.categoria_nombre" class="categoria-producto">
+                    {{ producto.categoria_nombre }}
+                    <span *ngIf="producto.subcategoria_nombre">
+                        / {{ producto.subcategoria_nombre }}
+                    </span>
+                </p>
+
+                <div class="producto-datos">
+
+                    <div>
+                        <span>Precio</span>
+
+                        <strong>
+                            ${{ producto.precio_base }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Stock</span>
+
+                        <strong>
+                            {{ producto.stock }}
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="producto-estado">
+
+                <span [class.activo]="producto.activo" [class.inactivo]="!producto.activo">
+                    {{ producto.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+
+            </div>
+
+            <div class="producto-acciones">
+
+                <button type="button" (click)="editarProducto(producto)">
+                    Editar
+                </button>
+
+            </div>
+
+        </div>
+
+        <p *ngIf="productosFiltrados.length === 0" class="sin-resultados">
+            No se encontraron productos con los filtros seleccionados.
+        </p>
+
+    </div>
+
+</div>
+
+<div *ngIf="productoEditando" class="modal-overlay">
+
+    <div class="modal">
+
+        <h2>Editar producto</h2>
+
+        <p class="modal-producto">
+            {{ productoEditando.nombre }}
+        </p>
+
+        <p class="modal-codigo">
+            Código: {{ productoEditando.codigo }}
+        </p>
+
+        <div class="campo">
+
+            <label for="nuevoPrecio">
+                Precio
+            </label>
+
+            <input
+                id="nuevoPrecio"
+                type="number"
+                min="0"
+                step="0.01"
+                [(ngModel)]="nuevoPrecio"
+            />
+
+        </div>
+
+        <div class="campo">
+
+            <label for="nuevoStock">
+                Stock
+            </label>
+
+            <input
+                id="nuevoStock"
+                type="number"
+                min="0"
+                step="1"
+                [(ngModel)]="nuevoStock"
+            />
+
+        </div>
+
+        <div class="campo-checkbox">
+
+            <label>
+                <input
+                    type="checkbox"
+                    [(ngModel)]="nuevoDestacado"
+                />
+
+                Producto destacado
+
+            </label>
+
+        </div>
+
+        <div class="campo-checkbox">
+
+            <label>
+                <input
+                    type="checkbox"
+                    [(ngModel)]="nuevoActivo"
+                />
+
+                Producto activo
+
+            </label>
+
+        </div>
+
+        <div class="modal-acciones">
+
+            <button
+                type="button"
+                class="cancelar"
+                (click)="cancelarEdicion()"
+                [disabled]="guardando"
+            >
+                Cancelar
+            </button>
+
+            <button
+                type="button"
+                class="guardar"
+                (click)="guardarProducto()"
+                [disabled]="guardando"
+            >
+                {{ guardando ? 'Guardando...' : 'Guardar' }}
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

@@ -88,6 +88,24 @@
 
 }
 
+.precio-container {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.precio-anterior {
+    color: #888;
+    font-size: 20px;
+    text-decoration: line-through;
+}
+
+.precio-oferta {
+    color: #718c31;
+    font-size: 46px;
+}
+
 .transferencia{
 
     color:#93af49;
@@ -105,8 +123,12 @@
 
 .descuento{
 
-    margin-top:10px;
-    color:#93af49;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #718c31;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
 
 }
 
@@ -212,4 +234,32 @@
 
     }
 
+}
+
+@media(max-width:1100px){
+  .thumbs { overflow-x:auto; padding-bottom:4px; }
+  .imagen-principal { order:1; width:100%; max-width:620px; margin:auto; }
+  .info { order:3; width:100%; max-width:620px; margin:auto; }
+}
+
+@media(max-width:600px){
+  .detalle-page { padding:22px 16px 45px; }
+  .detalle-top { gap:20px; }
+  .thumbs { gap:10px; }
+  .thumbs img { width:62px; flex:0 0 62px; }
+  .breadcrumb { margin-bottom:10px; font-size:12px; }
+  .info h1 { margin:0 0 16px; font-size:28px; line-height:1.2; }
+  .precio { font-size:30px; }
+  .precio-oferta { font-size:34px; }
+  .precio-anterior { font-size:16px; }
+  .transferencia { margin-top:7px; font-size:16px; }
+  .cuotas, .descuento { margin-top:10px; font-size:14px; }
+  .stock { margin-top:18px; }
+  .presentacion { margin-top:22px; }
+  .cantidad { margin-top:20px; }
+  .comprar { min-height:52px; margin-top:18px; }
+  .descripcion { margin-top:45px; }
+  .descripcion h2 { font-size:24px; }
+  .descripcion h3 { margin-top:28px; }
+  .descripcion p { font-size:15px; line-height:1.65; }
 }

@@ -138,6 +138,14 @@
 
     align-items: center;
 
+    color: white;
+
+    text-decoration: none;
+
+    &:hover {
+        color: #d9c48f;
+    }
+
 }
 
 .badge{
@@ -237,4 +245,18 @@
       padding-left: 45px;
     }
   }
+}
+
+@media (max-width: 480px) {
+  .navbar-top { height: 64px; }
+  .hamburger { left: 12px; padding: 8px; font-size: 25px; line-height: 1; }
+  .logo { max-width: 195px; overflow: hidden; font-size: 13px; letter-spacing: 1.5px; text-overflow: ellipsis; }
+  .icons { right: 14px; gap: 12px; font-size: 18px; }
+  .navbar-menu { top: 64px; }
+  .navbar-menu.open { max-height: calc(100dvh - 64px); overflow-y: auto; }
+  .navbar-menu a { padding: 16px 20px; font-size: 13px; }
+}
+
+@media (min-width: 481px) and (max-width: 900px) {
+  .navbar-menu.open { max-height: calc(100dvh - 82px); overflow-y: auto; }
 }

@@ -41,15 +41,25 @@
 
             </h1>
 
-            <div class="precio">
+            <div class="precio-container">
 
-                {{producto.precio.final | currency:'ARS':'symbol':'1.0-0'}}
+                <div *ngIf="producto.precio.descuento > 0" class="precio-anterior">
+                    {{producto.precio.base | currency:'ARS':'symbol':'1.2-2'}}
+                </div>
+
+                <div class="precio" [class.precio-oferta]="producto.precio.descuento > 0">
+                    {{producto.precio.final | currency:'ARS':'symbol':'1.2-2'}}
+                </div>
+
+                <div *ngIf="producto.precio.descuento > 0" class="descuento">
+                    {{producto.precio.descuento}}% OFF
+                </div>
 
             </div>
 
             <div class="transferencia">
 
-                {{producto.precio.transferencia | currency:'ARS':'symbol':'1.0-0'}}
+                {{producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2'}}
 
                 con Transferencia
 
@@ -64,17 +74,8 @@
 
                 {{
                     producto.precio.cuotas[2].valorCuota
-                    | currency:'ARS':'symbol':'1.0-0'
+                    | currency:'ARS':'symbol':'1.2-2'
                 }}
-
-            </div>
-
-            <div class="descuento">
-
-                {{producto.precio.descuento}}%
-
-                de descuento
-                
 
             </div>
 

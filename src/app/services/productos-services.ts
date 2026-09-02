@@ -18,6 +18,12 @@ export class ProductosService {
     );
   }
 
+  listarDestacados() {
+  return this.http.get<Producto[]>(
+    '/.netlify/functions/listar-productos-destacados'
+  );
+}
+
   listarPorSubcategoria(slug: string) {
 
   return this.http.get<Producto[]>(

@@ -56,6 +56,7 @@
 }
 
 .product-image-box {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
@@ -110,6 +111,10 @@
   margin-bottom: 10px;
 }
 
+.price-block--without-offer {
+  margin-top: 8px;
+}
+
 .old-price {
   font-size: 13px;
   color: #8d8d8d;
@@ -117,13 +122,18 @@
 }
 
 .current-price {
-  font-size: 24px;
+  font-size: 17px;
   font-weight: 700;
   color: #111;
 }
 
+.current-price--offer {
+  color: #718c31;
+  font-size: 20px;
+}
+
 .transfer-price {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: #333;
 }
@@ -156,7 +166,7 @@
   width: 92px;
   height: 30px;
   border: none;
-  background: #9cad6f;
+  background: #718c31;
   color: white;
   font-size: 11px;
   font-weight: 600;
@@ -215,4 +225,19 @@
     width: 100%;
   }
 
+}
+
+@media (max-width: 600px) {
+  .shop-page { padding: 22px 14px 48px; }
+  .shop-toolbar { margin-bottom: 26px; }
+  .toolbar-content { gap: 10px; }
+  .toolbar-select { min-height: 44px; font-size: 13px; }
+  .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 12px; }
+  .product-body { margin-top: 9px; }
+  .product-title { font-size: 11px; line-height: 1.35; }
+  .current-price { font-size: 16px; font-weight: 700; }
+  .current-price--offer { font-size: 18px; }
+  .transfer-price, .installments { font-size: 11px; line-height: 1.35; }
+  .installments { margin-bottom: 12px; }
+  .buy-button { width: 100%; min-height: 38px; font-size: 12px; }
 }

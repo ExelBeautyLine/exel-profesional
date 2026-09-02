@@ -3,17 +3,7 @@
   <div class="shop-toolbar">
     <div class="toolbar-line"></div>
 
-    <div class="toolbar-content">
-      <button class="toolbar-select">
-        <span>Categoría</span>
-        <span class="arrow">⌄</span>
-      </button>
-
-      <button class="toolbar-select">
-        <span>Ordenar por</span>
-        <span class="arrow">⌄</span>
-      </button>
-    </div>
+   
   </div>
 
   <section class="products-section">
@@ -26,6 +16,10 @@
 
        <a [routerLink]="['/productos', producto.slug]">
         <div class="product-image-box">
+          <span *ngIf="producto.precio.descuento > 0" class="badge-offer">
+            {{ producto.precio.descuento }}% OFF
+          </span>
+
           <img
             [src]="
                 'assets/img/' +
@@ -45,12 +39,21 @@
             {{producto.nombre}}
           </h3>
 
-          <div class="price">
-            {{producto.precio.final | currency:'ARS':'symbol':'1.0-0'}}
+          <div
+            class="price-block"
+            [class.price-block--without-offer]="producto.precio.descuento === 0"
+          >
+            <span *ngIf="producto.precio.descuento > 0" class="old-price">
+              {{ producto.precio.base | currency:'ARS':'symbol':'1.2-2' }}
+            </span>
+
+            <div class="current-price" [class.current-price--offer]="producto.precio.descuento > 0">
+              {{ producto.precio.final | currency:'ARS':'symbol':'1.2-2' }}
+            </div>
           </div>
 
           <div class="transfer-price">
-            {{producto.precio.transferencia | currency:'ARS':'symbol':'1.0-0'}}
+            {{producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2'}}
             con Transferencia
           </div>
 
@@ -62,7 +65,7 @@
 
               {{
                   producto.precio.cuotas[1].valorCuota
-                  | currency:'ARS':'symbol':'1.0-0'
+                  | currency:'ARS':'symbol':'1.2-2'
               }}
 
             sin interés

@@ -13,24 +13,22 @@ export const handler: Handler = async () => {
     const result = await pool.query(`
       SELECT *
       FROM productos
-      LIMIT 8
+      WHERE destacado = TRUE
+        AND activo = TRUE
+      ORDER BY id DESC;
     `);
 
-    const productos = await Promise.all(
-      result.rows.map(async (producto) => {
+    const productos = result.rows;
 
-        const precio = await calcularPrecio(
+    for (const producto of productos) {
+
+      producto.precio =
+        await calcularPrecio(
           producto,
           configuracion
         );
 
-        return {
-          ...producto,
-          precio
-        };
-
-      })
-    );
+    }
 
     return {
       statusCode: 200,
@@ -45,7 +43,7 @@ export const handler: Handler = async () => {
   } catch (error) {
 
     console.error(
-      'ERROR POSTGRES:',
+      'ERROR OBTENIENDO DESTACADOS:',
       error
     );
 
@@ -57,7 +55,8 @@ export const handler: Handler = async () => {
       },
 
       body: JSON.stringify({
-        error: 'No se pudieron cargar los productos'
+        error:
+          'No se pudieron obtener los productos destacados'
       })
     };
 

@@ -265,3 +265,13 @@ textarea:focus{
     }
 
 }
+
+@media(max-width:650px){
+  .checkout-container { margin:22px auto 40px; padding:0 14px; gap:18px; }
+  .checkout-left { gap:18px; }
+  .card { padding:18px 16px; border-radius:10px; }
+  .card h3 { margin-bottom:16px; font-size:18px; }
+  .grid input, textarea { min-height:46px; font-size:16px; }
+  .radio { gap:12px; padding:13px; }
+  .btn-continuar { min-height:52px; margin-top:18px; }
+}

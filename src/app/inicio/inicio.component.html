@@ -1,0 +1,457 @@
+<section class="inicio">
+
+  <!-- =====================================================
+       BENEFICIOS
+       ===================================================== -->
+
+  <section
+    class="beneficios"
+    aria-label="Beneficios de compra"
+  >
+
+    <div class="beneficios-pista">
+
+      <!-- PRIMER GRUPO -->
+      <div class="beneficios-grupo">
+
+        <span *ngFor="let beneficio of beneficios">
+
+          <span class="beneficio-icono">
+            {{ beneficio.icono }}
+          </span>
+
+          <span class="beneficio-texto">
+            {{ beneficio.titulo }}
+          </span>
+
+        </span>
+
+      </div>
+
+
+      <!-- SEGUNDO GRUPO - COPIA -->
+      <div
+        class="beneficios-grupo"
+        aria-hidden="true"
+      >
+
+        <span *ngFor="let beneficio of beneficios">
+
+          <span class="beneficio-icono">
+            {{ beneficio.icono }}
+          </span>
+
+          <span class="beneficio-texto">
+            {{ beneficio.titulo }}
+          </span>
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PRODUCTOS
+       ===================================================== -->
+
+  <section class="seccion">
+
+    <div class="seccion-header">
+
+      <div>
+
+        <p class="eyebrow">
+          Nuestra tienda
+        </p>
+
+        <h2>
+          Productos
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- CARGANDO -->
+
+    <div
+      *ngIf="cargandoProductos"
+      class="mensaje"
+    >
+      Cargando productos...
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div
+      *ngIf="errorProductos"
+      class="mensaje error"
+    >
+      {{ errorProductos }}
+    </div>
+
+
+    <!-- PRODUCTOS -->
+
+    <div
+      *ngIf="
+        !cargandoProductos &&
+        !errorProductos &&
+        productos.length > 0
+      "
+      class="productos-grid"
+    >
+
+      <article
+        class="producto-card"
+        *ngFor="let producto of productos"
+      >
+
+        <!-- IMAGEN -->
+
+        <a
+          [routerLink]="['/productos', producto.slug]"
+          class="producto-link"
+        >
+
+          <div class="producto-imagen">
+
+            <span
+              *ngIf="producto.precio.descuento > 0"
+              class="badge-offer"
+            >
+              {{ producto.precio.descuento }}% OFF
+            </span>
+
+            <img
+              [src]="
+                'assets/img/' +
+                producto.imagen_url +
+                '-0.jpg'
+              "
+              [alt]="producto.nombre"
+            />
+
+          </div>
+
+        </a>
+
+
+        <!-- INFORMACIÓN -->
+
+        <div class="producto-info">
+
+          <h3>
+            {{ producto.nombre }}
+          </h3>
+
+
+          <!-- PRECIO -->
+
+          <div class="precio">
+
+            <span
+              *ngIf="producto.precio.descuento > 0"
+              class="precio-anterior"
+            >
+              {{ producto.precio.base | currency:'ARS':'symbol':'1.2-2' }}
+            </span>
+
+            <strong>
+              {{ producto.precio.final | currency:'ARS':'symbol':'1.2-2' }}
+            </strong>
+
+          </div>
+
+
+          <!-- TRANSFERENCIA -->
+
+          <p class="transferencia">
+
+            {{ producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2' }}
+
+            con Transferencia
+
+          </p>
+
+
+          <!-- CUOTAS -->
+
+          <p
+            class="cuotas"
+            *ngIf="
+              producto.precio.cuotas &&
+              producto.precio.cuotas.length > 0
+            "
+          >
+
+            <strong>
+              x{{ producto.precio.cuotas[1].cantidad }}
+            </strong>
+
+            {{ producto.precio.cuotas[1].valorCuota | currency:'ARS':'symbol':'1.2-2' }}
+
+            <span
+              *ngIf="producto.precio.cuotas[1].interes === 0"
+              class="cuotas-sin-interes"
+            >
+              sin interés
+            </span>
+
+          </p>
+
+
+          <button
+            class="comprar"
+            (click)="comprar(producto)">
+
+            Comprar
+
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <!-- SIN PRODUCTOS -->
+
+    <div
+      *ngIf="
+        !cargandoProductos &&
+        !errorProductos &&
+        productos.length === 0
+      "
+      class="sin-productos"
+    >
+      No hay productos disponibles actualmente.
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PRODUCTOS DESTACADOS
+       ===================================================== -->
+
+  <section class="seccion seccion-destacados">
+
+    <div class="seccion-header">
+
+      <div>
+
+        <p class="eyebrow">
+          Nuestra selección
+        </p>
+
+        <h2>
+          Productos destacados
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- CARGANDO -->
+
+    <div
+      *ngIf="cargandoDestacados"
+      class="mensaje"
+    >
+      Cargando productos destacados...
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div
+      *ngIf="errorDestacados"
+      class="mensaje error"
+    >
+      {{ errorDestacados }}
+    </div>
+
+
+    <!-- CARRUSEL -->
+
+    <div
+      *ngIf="
+        !cargandoDestacados &&
+        !errorDestacados &&
+        productosDestacados.length > 0
+      "
+      class="carrusel"
+    >
+
+      <!-- ANTERIOR -->
+
+      <button
+        type="button"
+        class="carrusel-btn prev"
+        aria-label="Productos anteriores"
+        (click)="moverCarrusel(carruselDestacados, -1)"
+      >
+        ‹
+      </button>
+
+
+      <!-- TRACK -->
+
+      <div
+        #carruselDestacados
+        class="carrusel-track"
+      >
+
+        <article
+          class="producto-card"
+          *ngFor="let producto of productosDestacados"
+        >
+
+          <!-- IMAGEN -->
+
+          <a
+            [routerLink]="['/productos', producto.slug]"
+            class="producto-link"
+          >
+
+            <div class="producto-imagen">
+
+              <span
+                *ngIf="producto.precio.descuento > 0"
+                class="badge-offer"
+              >
+                {{ producto.precio.descuento }}% OFF
+              </span>
+
+              <img
+                [src]="
+                  'assets/img/' +
+                  producto.imagen_url +
+                  '-0.jpg'
+                "
+                [alt]="producto.nombre"
+              />
+
+            </div>
+
+          </a>
+
+
+          <!-- INFORMACIÓN -->
+
+          <div class="producto-info">
+
+            <h3>
+              {{ producto.nombre }}
+            </h3>
+
+
+            <!-- PRECIO -->
+
+            <div class="precio">
+
+              <span
+                *ngIf="producto.precio.descuento > 0"
+                class="precio-anterior"
+              >
+                {{ producto.precio.base | currency:'ARS':'symbol':'1.2-2' }}
+              </span>
+
+              <strong>
+                {{ producto.precio.final | currency:'ARS':'symbol':'1.2-2' }}
+              </strong>
+
+            </div>
+
+
+            <!-- TRANSFERENCIA -->
+
+            <p class="transferencia">
+
+              {{ producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2' }}
+
+              con Transferencia
+
+            </p>
+
+
+            <!-- CUOTAS -->
+
+            <p
+              class="cuotas"
+              *ngIf="
+                producto.precio.cuotas &&
+                producto.precio.cuotas.length > 0
+              "
+            >
+
+              <strong>
+                x{{ producto.precio.cuotas[1].cantidad }}
+              </strong>
+
+              {{ producto.precio.cuotas[1].valorCuota | currency:'ARS':'symbol':'1.2-2' }}
+
+              <span
+                *ngIf="producto.precio.cuotas[1].interes === 0"
+                class="cuotas-sin-interes"
+              >
+                sin interés
+              </span>
+
+            </p>
+
+
+            <button
+            class="comprar"
+            (click)="comprar(producto)">
+
+            Comprar
+
+          </button>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <!-- SIGUIENTE -->
+
+      <button
+        type="button"
+        class="carrusel-btn next"
+        aria-label="Productos siguientes"
+        (click)="moverCarrusel(carruselDestacados, 1)"
+      >
+        ›
+      </button>
+
+    </div>
+
+
+    <!-- SIN DESTACADOS -->
+
+    <div
+      *ngIf="
+        !cargandoDestacados &&
+        !errorDestacados &&
+        productosDestacados.length === 0
+      "
+      class="sin-productos"
+    >
+      No hay productos destacados actualmente.
+    </div>
+
+  </section>
+
+</section>

@@ -1,511 +1,122 @@
-<div class="carrito-container" *ngIf="carrito">
+<ng-container *ngIf="carrito; else carritoCargando">
+  <main *ngIf="carrito.items.length > 0; else carritoVacio" class="carrito-container">
+    <nav class="breadcrumb" aria-label="Navegación secundaria">
+      <a routerLink="/">Inicio</a><span aria-hidden="true">/</span><span>Carrito</span>
+    </nav>
 
-    <!-- Breadcrumb -->
-
-    <div class="breadcrumb">
-
-        <a routerLink="/">Inicio</a>
-
-        <span>/</span>
-
-        <span>Carrito</span>
-
-    </div>
-
-    <!-- Titulo -->
-
-    <h1>Carrito de compras</h1>
-
-    <!-- Seguir comprando -->
-
-    <div class="volver">
-
-        <a routerLink="/">
-
-            ← Seguir comprando
-
-        </a>
-
+    <div class="carrito-encabezado">
+      <div>
+        <p class="eyebrow">Tu selección</p>
+        <h1>Carrito de compras</h1>
+        <p class="cantidad-resumen">{{ carrito.cantidadItems }} {{ carrito.cantidadItems === 1 ? 'producto' : 'productos' }} en tu carrito</p>
+      </div>
+      <a routerLink="/" class="volver">&larr; Seguir comprando</a>
     </div>
 
     <div class="carrito-grid">
-
-        <!-- ========================= -->
-        <!-- PRODUCTOS -->
-        <!-- ========================= -->
-
-        <section class="productos">
-
-            <div class="producto-card" *ngFor="let item of carrito.items">
-
-                <!-- Imagen -->
-
-                <div class="producto-imagen">
-
-                    <img [src]="'assets/img/' + item.producto.imagen_url + '-0.jpg'" [alt]="item.producto.nombre">
-
-                </div>
-
-                <!-- Información -->
-
-                <div class="producto-info">
-
-                    <span class="codigo">
-
-                        Código {{ item.producto.codigo }}
-
-                    </span>
-
-                    <h2>
-
-                        {{ item.producto.nombre }}
-
-                    </h2>
-
-                    <p class="presentacion">
-
-                        {{ item.producto.presentacion }}
-
-                    </p>
-
-                    <p class="stock" *ngIf="item.producto.stock > 0">
-
-                        ✔ Stock disponible
-
-                    </p>
-                    <p class="sin-stock" *ngIf="item.sinStock">
-
-                        Sin stock
-
-                    </p>
-
-                    <p class="stock-restante" *ngIf="item.producto.stock > 0">
-
-                        Stock disponible: {{ item.producto.stock }}
-
-                    </p>
-
-                    <div class="descuento" *ngIf="item.producto.precio.descuento > 0">
-
-                        {{ item.producto.precio.descuento }}% OFF
-
-                    </div>
-
-                    <div class="precios">
-
-                        <div>
-
-                            <span>
-
-                                Precio Tarjeta
-
-                            </span>
-
-                            <strong [class.tachado]="item.sinStock">
-
-                                {{ item.producto.precio.tarjeta | currency:'ARS' }}
-
-                            </strong>
-
-                        </div>
-
-                        <div>
-
-                            <span class="verde">
-
-                                Precio Transferencia
-
-                            </span>
-
-                            <strong class="verde"
-
-                                class="verde"
-                                [class.tachado]="item.sinStock">
-
-                                {{ item.producto.precio.transferencia
-                                | currency:'ARS':'symbol':'1.0-0' }}
-
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                    <div class="cuotas" *ngIf="item.producto.precio.cuotas.length">
-
-                        Hasta
-
-                        <strong>
-
-                            {{
-                            item.producto.precio.cuotas[
-                            item.producto.precio.cuotas.length - 1
-                            ].cantidad
-                            }}
-
-                            cuotas
-
-                        </strong>
-
-                    </div>
-
-                </div>
-
-                <!-- Acciones -->
-
-                <div class="producto-acciones">
-
-                    <label>
-
-                        Cantidad
-
-                    </label>
-
-                    <div class="cantidad">
-
-                        <button (click)="disminuir(item)">
-
-                            −
-
-                        </button>
-
-                        <span>
-
-                            {{ item.cantidad }}
-
-                        </span>
-
-                        <button (click)="aumentar(item)" [disabled]="item.cantidad >= item.producto.stock">
-                            +
-                        </button>
-
-                    </div>
-
-                    <button class="eliminar" (click)="eliminar(item)">
-
-                        🗑 Eliminar
-
-                    </button>
-
-                </div>
-
-                <!-- Subtotal -->
-
-                <div class="producto-subtotal">
-
-                    <div class="subtotal-item">
-
-                        <span>
-
-                            Subtotal Tarjeta
-
-                        </span>
-
-                        <strong>
-
-                            {{ item.subtotalTarjeta
-                            | currency:'ARS':'symbol':'1.0-0' }}
-
-                        </strong>
-
-                    </div>
-
-                    <div class="subtotal-item">
-
-                        <span class="verde">
-
-                            Subtotal Transferencia
-
-                        </span>
-
-                        <strong class="verde">
-
-                            {{ item.subtotalTransferencia
-                            | currency:'ARS':'symbol':'1.0-0' }}
-
-                        </strong>
-
-                    </div>
-
-                    <div class="ahorro-item">
-
-                        Ahorrás
-
-                        <strong>
-
-                            {{
-                            item.subtotalTarjeta -
-                            item.subtotalTransferencia
-                            | currency:'ARS':'symbol':'1.0-0'
-                            }}
-
-                        </strong>
-
-                    </div>
-
-                </div>
-
+      <section class="productos" aria-label="Productos del carrito">
+        <article class="producto-card" *ngFor="let item of carrito.items">
+          <a [routerLink]="['/productos', item.producto.slug]" class="producto-imagen">
+            <img [src]="'assets/img/' + item.producto.imagen_url + '-0.jpg'" [alt]="item.producto.nombre" />
+          </a>
+
+          <div class="producto-info">
+            <span class="codigo">Código {{ item.producto.codigo }}</span>
+            <h2>{{ item.producto.nombre }}</h2>
+            <p class="presentacion">{{ item.producto.presentacion }}</p>
+            <p class="stock" *ngIf="item.producto.stock > 0 && !item.sinStock">&#10003; Stock disponible</p>
+            <p class="sin-stock" *ngIf="item.sinStock">Sin stock</p>
+            <p class="stock-restante" *ngIf="item.producto.stock > 0">{{ item.producto.stock }} unidades disponibles</p>
+            <span class="descuento" *ngIf="item.producto.precio.descuento > 0">{{ item.producto.precio.descuento }}% OFF</span>
+
+            <div class="precios">
+              <div>
+                <span>Precio con tarjeta</span>
+                <strong [class.tachado]="item.sinStock">{{ item.producto.precio.tarjeta | currency:'ARS':'symbol':'1.2-2' }}</strong>
+              </div>
+              <div class="precio-transferencia">
+                <span>Precio por transferencia</span>
+                <strong [class.tachado]="item.sinStock">{{ item.producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2' }}</strong>
+              </div>
             </div>
 
-            <!-- Medios de envío -->
+            <p class="cuotas" *ngIf="item.producto.precio.cuotas.length">
+              Hasta <strong>{{ item.producto.precio.cuotas[item.producto.precio.cuotas.length - 1].cantidad }} cuotas</strong>
+            </p>
+          </div>
 
-            <div class="medios-envio">
-
-                <div>
-
-                    🚚 Calcular medios de envío
-
-                </div>
-
-                <button>
-
-                    +
-
-                </button>
-
+          <div class="producto-acciones">
+            <span class="acciones-titulo">Cantidad</span>
+            <div class="cantidad" aria-label="Cantidad del producto">
+              <button type="button" aria-label="Disminuir cantidad" (click)="disminuir(item)" [disabled]="item.cantidad <= 1">&minus;</button>
+              <span>{{ item.cantidad }}</span>
+              <button type="button" aria-label="Aumentar cantidad" (click)="aumentar(item)" [disabled]="item.cantidad >= item.producto.stock">+</button>
             </div>
+            <button type="button" class="eliminar" (click)="eliminar(item)">Eliminar</button>
+          </div>
+
+          <div class="producto-subtotal">
+            <div class="subtotal-item">
+              <span>Subtotal con tarjeta</span>
+              <strong>{{ item.subtotalTarjeta | currency:'ARS':'symbol':'1.2-2' }}</strong>
+            </div>
+            <div class="subtotal-item subtotal-transferencia">
+              <span>Subtotal por transferencia</span>
+              <strong>{{ item.subtotalTransferencia | currency:'ARS':'symbol':'1.2-2' }}</strong>
+            </div>
+            <p class="ahorro-item">Ahorrás <strong>{{ item.subtotalTarjeta - item.subtotalTransferencia | currency:'ARS':'symbol':'1.2-2' }}</strong></p>
+          </div>
+        </article>
+
+        <div class="medios-envio">
+          <span class="envio-icono" aria-hidden="true">&#128666;</span>
+          <div>
+            <strong>Envío a domicilio</strong>
+            <p>Podrás calcular las opciones de envío antes de finalizar la compra.</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="resumen" aria-label="Resumen de compra">
+        <h2>Resumen de compra</h2>
+
+        <section class="envio-gratis">
+          <p>&#128666; Envío gratis superando los <strong>$120.000</strong></p>
+          <div class="barra" aria-hidden="true"><div class="progreso" [style.width.%]="obtenerPorcentajeEnvioGratis()"></div></div>
+          <small *ngIf="carrito.subtotalTransferencia < 120000">Te faltan <strong>{{ 120000 - carrito.subtotalTransferencia | currency:'ARS':'symbol':'1.2-2' }}</strong> para obtener envío gratis.</small>
+          <small *ngIf="carrito.subtotalTransferencia >= 120000" class="envio-completo">&#10003; Ya tenés envío gratis.</small>
         </section>
 
-        <!-- ========================= -->
-        <!-- RESUMEN -->
-        <!-- ========================= -->
-
-        <aside class="resumen">
-
-            <h2>Resumen de compra</h2>
-
-            <div class="envio-gratis">
-
-                <div>
-
-                    🚚 Envío gratis superando los
-
-                    <strong>$120.000</strong>
-
-                </div>
-
-                <div class="barra">
-
-                    <div class="progreso" [style.width.%]="obtenerPorcentajeEnvioGratis()">
-                    </div>
-
-                </div>
-
-                <small *ngIf="carrito.subtotalTransferencia < 120000">
-
-                    Te faltan
-
-                    <strong>
-
-                        {{
-                        120000 - carrito.subtotalTransferencia
-                        | currency:'ARS':'symbol':'1.0-0'
-                        }}
-
-                    </strong>
-
-                    para obtener envío gratis.
-
-                </small>
-
-                <small *ngIf="carrito.subtotalTransferencia >= 120000" class="verde">
-
-                    ✔ Ya tenés envío gratis.
-
-                </small>
-
-            </div>
-
-            <div class="linea">
-
-                <span>Productos</span>
-
-                <strong>
-
-                    {{ carrito.items.length }}
-
-                </strong>
-
-            </div>
-
-            <div class="linea">
-
-                <span>Unidades</span>
-
-                <strong>
-
-                    {{ carrito.cantidadItems }}
-
-                </strong>
-
-            </div>
-
-            <div class="linea">
-
-                <span>Subtotal Tarjeta</span>
-
-                <strong>
-
-                    {{
-                    carrito.subtotalTarjeta
-                    | currency:'ARS':'symbol':'1.0-0'
-                    }}
-
-                </strong>
-
-            </div>
-
-            <div class="linea">
-
-                <span class="verde">
-
-                    Subtotal Transferencia
-
-                </span>
-
-                <strong class="verde">
-
-                    {{
-                    carrito.subtotalTransferencia
-                    | currency:'ARS':'symbol':'1.0-0'
-                    }}
-
-                </strong>
-
-            </div>
-
-            <div class="linea">
-
-                <span>
-
-                    Envío
-
-                </span>
-
-                <span>
-
-                    A calcular
-
-                </span>
-
-            </div>
-
-            <hr>
-
-            <div class="total">
-
-                <div>
-
-                    <span>
-
-                        Total Tarjeta
-
-                    </span>
-
-                    <strong>
-
-                        {{
-                        carrito.subtotalTarjeta
-                        | currency:'ARS':'symbol':'1.0-0'
-                        }}
-
-                    </strong>
-
-                </div>
-
-                <div>
-
-                    <span class="verde">
-
-                        Total Transferencia
-
-                    </span>
-
-                    <strong class="verde">
-
-                        {{
-                        carrito.subtotalTransferencia
-                        | currency:'ARS':'symbol':'1.0-0'
-                        }}
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-            <div class="ahorro">
-
-                💰 Ahorrás
-
-                <strong>
-
-                    {{
-                    carrito.subtotalTarjeta -
-                    carrito.subtotalTransferencia
-                    | currency:'ARS':'symbol':'1.0-0'
-                    }}
-
-                </strong>
-
-                pagando por transferencia.
-
-            </div>
-
-            <button class="vaciar" (click)="vaciarCarrito()">
-
-                Vaciar carrito
-
-            </button>
-
-            <button class="btn-comprar" (click)="continuarCompra()">
-                <a routerLink="/checkout">Continuar compra</a>
-            </button>
-
-            <p class="seguridad">
-
-                🔒 Compra 100% segura
-
-            </p>
-
-        </aside>
-
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- CARRITO VACÍO -->
-<!-- ========================= -->
-
-<ng-template #carritoVacio>
-
-    <div class="carrito-vacio">
-
-        <div class="icono">
-
-            🛒
-
+        <div class="linea"><span>Productos</span><strong>{{ carrito.items.length }}</strong></div>
+        <div class="linea"><span>Unidades</span><strong>{{ carrito.cantidadItems }}</strong></div>
+        <div class="linea"><span>Subtotal con tarjeta</span><strong>{{ carrito.subtotalTarjeta | currency:'ARS':'symbol':'1.2-2' }}</strong></div>
+        <div class="linea linea-transferencia"><span>Subtotal por transferencia</span><strong>{{ carrito.subtotalTransferencia | currency:'ARS':'symbol':'1.2-2' }}</strong></div>
+        <div class="linea"><span>Envío</span><span>A calcular</span></div>
+
+        <div class="total">
+          <div><span>Total con tarjeta</span><strong>{{ carrito.subtotalTarjeta | currency:'ARS':'symbol':'1.2-2' }}</strong></div>
+          <div class="total-transferencia"><span>Total por transferencia</span><strong>{{ carrito.subtotalTransferencia | currency:'ARS':'symbol':'1.2-2' }}</strong></div>
         </div>
 
-        <h2>
-
-            Tu carrito está vacío
-
-        </h2>
-
-        <p>
-
-            Todavía no agregaste productos.
-
-        </p>
-
-        <a routerLink="/" class="seguir">
-
-            Seguir comprando
-
-        </a>
-
+        <p class="ahorro">Ahorrás <strong>{{ carrito.subtotalTarjeta - carrito.subtotalTransferencia | currency:'ARS':'symbol':'1.2-2' }}</strong> pagando por transferencia.</p>
+        <a routerLink="/checkout" class="btn-comprar" (click)="continuarCompra()">Continuar compra</a>
+        <button type="button" class="vaciar" (click)="vaciarCarrito()">Vaciar carrito</button>
+        <p class="seguridad">&#128274; Compra 100% segura</p>
+      </aside>
     </div>
+  </main>
+</ng-container>
 
+<ng-template #carritoCargando>
+  <div class="carrito-estado">Cargando carrito...</div>
+</ng-template>
+
+<ng-template #carritoVacio>
+  <main class="carrito-vacio">
+    <div class="icono" aria-hidden="true">&#128722;</div>
+    <p class="eyebrow">Tu selección</p>
+    <h1>Tu carrito está vacío</h1>
+    <p>Todavía no agregaste productos. Encontrá lo que necesitás en nuestra tienda.</p>
+    <a routerLink="/" class="seguir">Seguir comprando</a>
+  </main>
 </ng-template>

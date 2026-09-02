@@ -1,0 +1,483 @@
+<div class="promociones-container">
+
+  <div class="promociones-header">
+
+    <div>
+      <h1>Promociones</h1>
+      <p>Administrá las promociones de la tienda</p>
+    </div>
+
+    <button type="button" class="btn-nueva" (click)="abrirFormulario()">
+      + Nueva promoción
+    </button>
+
+  </div>
+
+
+  <!-- MENSAJE DE ÉXITO -->
+
+  <p *ngIf="mensaje" class="mensaje-exito">
+    {{ mensaje }}
+  </p>
+
+
+  <!-- ERROR -->
+
+  <div *ngIf="error" class="mensaje error">
+    {{ error }}
+  </div>
+
+
+  <!-- CARGANDO -->
+
+  <div *ngIf="cargando" class="mensaje">
+    Cargando promociones...
+  </div>
+
+
+  <!-- SIN PROMOCIONES -->
+
+  <div *ngIf="!cargando && !error && promociones.length === 0" class="mensaje">
+    No hay promociones cargadas.
+  </div>
+
+
+  <!-- LISTADO -->
+
+  <div *ngIf="!cargando && !error && promociones.length > 0" class="promociones-lista">
+
+    <div class="promocion" *ngFor="let promocion of promociones">
+
+      <div class="promocion-info">
+
+        <div class="promocion-titulo">
+
+          <h2>
+            {{ promocion.nombre }}
+          </h2>
+
+          <span [class.activa]="promocion.activo" [class.inactiva]="!promocion.activo">
+            {{ promocion.activo ? 'Activa' : 'Inactiva' }}
+          </span>
+
+        </div>
+
+
+        <p *ngIf="promocion.descripcion" class="descripcion">
+          {{ promocion.descripcion }}
+        </p>
+
+
+        <div class="promocion-datos">
+
+          <div>
+            <span>Descuento</span>
+
+            <strong>
+              {{ promocion.porcentaje_descuento }}%
+            </strong>
+          </div>
+
+
+          <div>
+            <span>Desde</span>
+
+            <strong>
+              {{ promocion.fecha_inicio }}
+            </strong>
+          </div>
+
+
+          <div>
+            <span>Hasta</span>
+
+            <strong>
+              {{ promocion.fecha_fin }}
+            </strong>
+          </div>
+
+
+          <div>
+            <span>Acumulable</span>
+
+            <strong>
+              {{ promocion.acumulable ? 'Sí' : 'No' }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="promocion-acciones">
+
+        <button type="button" class="btn-editar" (click)="editarPromocion(promocion)">
+          Editar
+        </button>
+
+        <button type="button" class="btn-eliminar" (click)="confirmarEliminar(promocion)" [disabled]="eliminando">
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- MODAL NUEVA PROMOCIÓN -->
+<!-- ================================================= -->
+
+<div *ngIf="mostrarFormulario" class="promocion-modal-overlay">
+
+  <div class="promocion-modal">
+
+    <h2>
+      {{ modoEdicion ? 'Editar promoción' : 'Nueva promoción' }}
+    </h2>
+
+    <div *ngIf="errorFormulario" class="modal-alerta error">
+      {{ errorFormulario }}
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- DATOS DE LA PROMOCIÓN -->
+    <!-- ========================= -->
+
+    <div class="campo">
+
+      <label for="nombrePromocion">
+        Nombre
+      </label>
+
+      <input id="nombrePromocion" type="text" [(ngModel)]="nombre" placeholder="Ej: 20% OFF" />
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="descripcionPromocion">
+        Descripción
+      </label>
+
+      <textarea id="descripcionPromocion" [(ngModel)]="descripcion" placeholder="Descripción de la promoción"
+        rows="3"></textarea>
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="descuentoPromocion">
+        Descuento (%)
+      </label>
+
+      <input id="descuentoPromocion" type="number" min="0" max="100" step="0.01" [(ngModel)]="porcentajeDescuento" />
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- FECHAS -->
+    <!-- ========================= -->
+
+    <div class="fechas">
+
+      <div class="campo">
+
+        <label for="fechaInicio">
+          Fecha de inicio
+        </label>
+
+        <input id="fechaInicio" type="date" [(ngModel)]="fechaInicio" />
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="fechaFin">
+          Fecha de fin
+        </label>
+
+        <input id="fechaFin" type="date" [(ngModel)]="fechaFin" />
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- OPCIONES -->
+    <!-- ========================= -->
+
+    <div class="opciones">
+
+      <label>
+
+        <input type="checkbox" [(ngModel)]="activo" />
+
+        Activa
+
+      </label>
+
+
+      <label>
+
+        <input type="checkbox" [(ngModel)]="acumulable" />
+
+        Acumulable
+
+      </label>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- CATEGORÍAS -->
+    <!-- ========================= -->
+
+    <div class="seleccion">
+
+      <div class="seleccion-header">
+
+        <div>
+
+          <h3>
+            Categorías
+          </h3>
+
+          <p>
+            {{ cantidadCategoriasSeleccionadas }}
+            seleccionadas
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="seleccion-lista categorias-lista">
+
+        <label class="seleccion-item" *ngFor="let categoria of categorias">
+
+          <input type="checkbox" [checked]="categoriaSeleccionada(categoria.id)"
+            (change)="seleccionarCategoria(categoria.id)" />
+
+          <span class="seleccion-nombre">
+            {{ categoria.nombre }}
+          </span>
+
+          <span class="cantidad">
+
+            {{ categoria.cantidad_productos }}
+
+            productos
+
+          </span>
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- PRODUCTOS -->
+    <!-- ========================= -->
+
+    <div class="seleccion productos-selector">
+
+      <div class="seleccion-header">
+
+        <div>
+
+          <h3>
+            Productos
+          </h3>
+
+          <p>
+
+            {{ cantidadProductosSeleccionados }}
+            seleccionados
+
+            ·
+
+            {{ cantidadTotalProductos }}
+            en total
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- FILTRO DE CATEGORÍA -->
+
+      <div class="filtro-categoria">
+
+        <label for="categoriaFiltro">
+          Filtrar por categoría
+        </label>
+
+        <select id="categoriaFiltro" [ngModel]="categoriaFiltro" (ngModelChange)="seleccionarFiltroCategoria($event)">
+
+          <option [ngValue]="null">
+            Todas las categorías
+          </option>
+
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+
+            {{ categoria.nombre }}
+
+            ({{ categoria.cantidad_productos }})
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- BUSCADOR -->
+
+      <div class="busqueda-producto">
+
+        <input type="text" [(ngModel)]="busquedaProducto" placeholder="Buscar por nombre o código..." />
+
+      </div>
+
+
+      <!-- CONTADOR -->
+
+      <div class="productos-resultados">
+
+        Mostrando
+
+        <strong>
+          {{ cantidadProductosFiltrados }}
+        </strong>
+
+        de
+
+        <strong>
+          {{ cantidadTotalProductos }}
+        </strong>
+
+        productos
+
+      </div>
+
+
+      <!-- LISTA -->
+
+      <div class="seleccion-lista productos-lista">
+
+        <label class="seleccion-item producto-item" *ngFor="let producto of productosFiltrados">
+
+          <input type="checkbox" [checked]="productoSeleccionado(producto.id)"
+            (change)="seleccionarProducto(producto.id)" />
+
+
+          <span class="producto-selector-info">
+
+            <strong>
+              {{ producto.nombre }}
+            </strong>
+
+            <small>
+
+              {{ producto.codigo }}
+
+              ·
+
+              {{ producto.categoria_nombre }}
+
+            </small>
+
+          </span>
+
+        </label>
+
+
+        <p *ngIf="productosFiltrados.length === 0" class="seleccion-vacia">
+          No se encontraron productos.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- BOTONES -->
+    <!-- ========================= -->
+
+    <div class="modal-acciones">
+
+      <button type="button" class="cancelar" (click)="cerrarFormulario()" [disabled]="guardando">
+        Cancelar
+      </button>
+
+
+      <button type="button" class="guardar" (click)="guardarPromocion()" [disabled]="guardando">
+        {{ guardando
+        ? (modoEdicion ? 'Guardando...' : 'Creando...')
+        : (modoEdicion ? 'Guardar cambios' : 'Crear promoción')
+        }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- ================================= -->
+<!-- MODAL CONFIRMAR ELIMINACIÓN -->
+<!-- ================================= -->
+
+<div *ngIf="promocionEliminar" class="promocion-modal-overlay">
+
+  <div class="promocion-modal modal-confirmacion">
+
+    <h2>
+      ¿Eliminar promoción?
+    </h2>
+
+    <p class="confirmacion-texto">
+      Estás por eliminar:
+    </p>
+
+    <strong class="confirmacion-nombre">
+      {{ promocionEliminar.nombre }}
+    </strong>
+
+    <p class="confirmacion-advertencia">
+      Esta acción eliminará también las categorías y
+      productos asociados a esta promoción.
+      Esta acción no se puede deshacer.
+    </p>
+
+    <div class="modal-acciones">
+
+      <button type="button" class="cancelar" (click)="cancelarEliminar()" [disabled]="eliminando">
+        Cancelar
+      </button>
+
+      <button type="button" class="btn-confirmar-eliminar" (click)="eliminarPromocion()" [disabled]="eliminando">
+        {{ eliminando ? 'Eliminando...' : 'Eliminar promoción' }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

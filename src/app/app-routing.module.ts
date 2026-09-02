@@ -5,12 +5,16 @@ import { ProductoDetalleComponent } from './producto-detalle/producto-detalle.co
 import { CarritoComponent } from './carrito/carrito.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { GraciasComponent } from './gracias/gracias.component';
+import { LoginComponent } from './admin/login/login.component';
+import { PanelComponent } from './admin/panel/panel.component';
+import { adminGuard } from './admin/admin.guard';
+import { PromocionesComponent } from './admin/promociones/promociones.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
     {
       path: '',
-      redirectTo: 'productos',
-      pathMatch: 'full'
+      component: InicioComponent
     },
     {
       path: 'productos',
@@ -36,7 +40,20 @@ const routes: Routes = [
     {
     path: "gracias",
     component: GraciasComponent
-    }
+    },
+    {
+    path: 'admin/login',
+    component: LoginComponent
+   },
+   {
+    path: 'admin',
+    component: PanelComponent,
+    canActivate: [adminGuard]
+   },
+   {
+    path: 'admin/promociones',
+    component: PromocionesComponent
+   }
 
 
 ];
