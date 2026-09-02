@@ -1,17 +1,197 @@
+:host {
+  display: block;
+  --footer-verde: #a8c464;
+  --footer-linea: rgba(255, 255, 255, .14);
+}
+
 .footer {
-  background: black;
-  color: white;
-  padding: 50px;
+  overflow: hidden;
+  background: #080908;
+  color: #f8f8f5;
 }
 
-.footer-grid {
+.footer-envio,
+.footer-comunidad,
+.footer-newsletter,
+.footer-contenido,
+.footer-inferior {
+  max-width: 1320px;
+  margin: auto;
+  padding-right: 32px;
+  padding-left: 32px;
+}
+
+.footer-envio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  min-height: 54px;
+  color: #e8efdc;
+  font-size: 13px;
+  letter-spacing: .035em;
+  text-align: center;
+}
+
+.footer-envio span { font-size: 18px; }
+.footer-envio p { margin: 0; }
+.footer-envio strong { color: var(--footer-verde); }
+
+.footer-comunidad {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: minmax(240px, .8fr) minmax(330px, 1.2fr);
+  gap: 58px;
+  padding-top: 43px;
+  padding-bottom: 43px;
+  border-top: 1px solid var(--footer-linea);
+  border-bottom: 1px solid var(--footer-linea);
 }
 
-@media (max-width: 600px) {
-  .footer { padding: 32px 20px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 20px; }
-  .footer-grid h3 { margin: 0 0 10px; font-size: 16px; }
-  .footer-grid p { margin: 7px 0; font-size: 14px; }
+.footer-eyebrow {
+  margin: 0 0 8px;
+  color: var(--footer-verde);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.footer-comunidad h2,
+.footer-newsletter h2,
+.footer-columna h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.footer-comunidad h2 { max-width: 360px; font-size: clamp(21px, 2vw, 27px); line-height: 1.2; }
+.footer-comunidad > p { max-width: 620px; margin: 0; align-self: center; color: #c6c8c3; font-size: 15px; line-height: 1.7; }
+
+.footer-newsletter {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(350px, .95fr);
+  gap: 55px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: linear-gradient(90deg, #141b10, #0e100d 70%);
+}
+
+.footer-newsletter h2 { margin-bottom: 8px; font-size: 23px; line-height: 1.2; }
+.footer-newsletter > div > p:last-child { margin: 0; color: #d6d9d2; font-size: 14px; }
+.footer-newsletter strong { color: var(--footer-verde); }
+
+.newsletter-form { display: grid; align-content: center; gap: 8px; }
+.newsletter-form label { color: #d6d9d2; font-size: 12px; font-weight: 700; }
+.newsletter-campos { display: flex; gap: 8px; }
+.newsletter-campos input {
+  min-width: 0;
+  flex: 1;
+  height: 44px;
+  padding: 0 13px;
+  border: 1px solid #6d7464;
+  border-radius: 4px;
+  outline: 0;
+  background: #fff;
+  color: #1d211c;
+  font: inherit;
+  font-size: 13px;
+}
+.newsletter-campos input:focus { border-color: var(--footer-verde); box-shadow: 0 0 0 3px rgba(168, 196, 100, .2); }
+.newsletter-campos button {
+  min-width: 162px;
+  padding: 0 15px;
+  border: 1px solid var(--footer-verde);
+  border-radius: 4px;
+  background: var(--footer-verde);
+  color: #17200d;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.newsletter-campos button:hover { border-color: #c7dc93; background: #c7dc93; transform: translateY(-1px); }
+.newsletter-form small { min-height: 16px; color: #abb0a4; font-size: 11px; }
+.newsletter-form small.newsletter-confirmacion { color: #c7dc93; }
+
+.footer-contenido {
+  display: grid;
+  grid-template-columns: minmax(270px, 1.35fr) minmax(150px, .75fr) minmax(230px, .95fr);
+  gap: 52px;
+  padding-top: 55px;
+  padding-bottom: 51px;
+}
+
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--footer-verde); font-weight: 500; }
+.footer-marca > p { max-width: 430px; margin: 0; color: #afb3ac; font-size: 13px; line-height: 1.7; }
+.footer-marca .footer-compra-segura { margin-top: 15px; color: #e4e7df; font-weight: 600; }
+
+.footer-columna h2 { margin-bottom: 18px; color: var(--footer-verde); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.footer-columna ul { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
+.footer-columna a { color: #f2f3ef; font-size: 13px; text-decoration: none; transition: color .2s; }
+.footer-columna a:hover { color: var(--footer-verde); }
+.footer-aclaracion { margin: 19px 0 0; color: #969c92; font-size: 11px; line-height: 1.55; }
+
+.instagram-link { display: inline-flex; align-items: center; gap: 8px; }
+.instagram-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+.footer-inferior {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 19px;
+  padding-bottom: 19px;
+  border-top: 1px solid var(--footer-linea);
+  color: #8d938a;
+  font-size: 11px;
+}
+.footer-inferior p { margin: 0; }
+
+.whatsapp-flotante {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+  display: grid;
+  width: 53px;
+  height: 53px;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+  transition: transform .2s, box-shadow .2s;
+}
+.whatsapp-flotante:hover { box-shadow: 0 9px 24px rgba(0, 0, 0, .35); transform: scale(1.06); }
+.whatsapp-flotante svg { width: 31px; height: 31px; fill: #fff; }
+.whatsapp-flotante:focus-visible { outline: 3px solid #a8c464; outline-offset: 3px; }
+
+@media (max-width: 800px) {
+  .footer-comunidad, .footer-newsletter { grid-template-columns: 1fr; gap: 22px; }
+  .footer-newsletter { background: linear-gradient(180deg, #141b10, #0e100d); }
+  .footer-contenido { grid-template-columns: 1.1fr 1fr; gap: 36px 28px; }
+  .footer-marca { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .footer-envio, .footer-comunidad, .footer-newsletter, .footer-contenido, .footer-inferior { padding-right: 20px; padding-left: 20px; }
+  .footer-envio { min-height: 50px; font-size: 11px; }
+  .footer-comunidad { padding-top: 32px; padding-bottom: 32px; }
+  .footer-comunidad > p { font-size: 13px; }
+  .footer-newsletter { padding-top: 31px; padding-bottom: 31px; }
+  .footer-newsletter h2 { font-size: 20px; }
+  .newsletter-campos { flex-direction: column; }
+  .newsletter-campos button { min-height: 44px; }
+  .footer-contenido { grid-template-columns: 1fr; padding-top: 38px; padding-bottom: 36px; }
+  .footer-marca { grid-column: auto; }
+  .footer-inferior { flex-direction: column; gap: 7px; }
+  .whatsapp-flotante { right: 15px; bottom: 15px; width: 49px; height: 49px; }
 }

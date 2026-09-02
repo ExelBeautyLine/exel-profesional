@@ -11,11 +11,11 @@
     <div class="products-grid">
 
       <article
-        class="product-card"
+        class="producto-card"
         *ngFor="let producto of productos">
 
-       <a [routerLink]="['/productos', producto.slug]">
-        <div class="product-image-box">
+       <a [routerLink]="['/productos', producto.slug]" class="producto-link">
+        <div class="producto-imagen">
           <span *ngIf="producto.precio.descuento > 0" class="badge-offer">
             {{ producto.precio.descuento }}% OFF
           </span>
@@ -33,35 +33,30 @@
         </div>
        </a>
 
-        <div class="product-body">
+        <div class="producto-info">
 
-          <h3 class="product-title">
+          <h3>
             {{producto.nombre}}
           </h3>
 
-          <div
-            class="price-block"
-            [class.price-block--without-offer]="producto.precio.descuento === 0"
-          >
-            <span *ngIf="producto.precio.descuento > 0" class="old-price">
+          <div class="precio">
+            <span *ngIf="producto.precio.descuento > 0" class="precio-anterior">
               {{ producto.precio.base | currency:'ARS':'symbol':'1.2-2' }}
             </span>
 
-            <div class="current-price" [class.current-price--offer]="producto.precio.descuento > 0">
+            <strong>
               {{ producto.precio.final | currency:'ARS':'symbol':'1.2-2' }}
-            </div>
+            </strong>
           </div>
 
-          <div class="transfer-price">
+          <p class="transferencia">
             {{producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2'}}
             con Transferencia
-          </div>
+          </p>
 
-          <div class="installments"
-            class="installments"
-            *ngIf="producto.precio.cuotas.length">
+          <p class="cuotas" *ngIf="producto.precio.cuotas.length > 1">
 
-              {{ producto.precio.cuotas[1].cantidad }} x
+              <strong>x{{ producto.precio.cuotas[1].cantidad }}</strong>
 
               {{
                   producto.precio.cuotas[1].valorCuota
@@ -69,10 +64,10 @@
               }}
 
             sin interés
-          </div>
+          </p>
 
           <button
-            class="buy-button"
+            class="comprar"
             (click)="comprar(producto)">
 
             Comprar

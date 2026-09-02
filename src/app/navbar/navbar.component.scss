@@ -79,7 +79,8 @@
     position: relative;
   }
 
-  a {
+  a,
+  .menu-category {
     color: inherit;
     text-decoration: none;
     color: white;
@@ -90,6 +91,13 @@
     transition: .25s;
     cursor: pointer;
     &:hover { color: #d9c48f; }
+  }
+
+  .menu-category {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
   }
 }
 
@@ -211,7 +219,11 @@
     overflow: hidden;
     transition: .3s;
 
-    &.open { max-height: 100vh; }
+    &.open {
+      max-height: min(70dvh, 540px);
+      overflow-y: auto;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
 
     > ul {
       flex-direction: column;
@@ -224,9 +236,12 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    a {
+    a,
+    .menu-category {
       display: block;
+      width: 100%;
       padding: 18px 22px;
+      text-align: left;
     }
   }
 
@@ -239,11 +254,16 @@
     box-shadow: none;
     padding: 0;
     margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
 
     a {
       color: #d7d7d7;
       padding-left: 45px;
     }
+
+    &.submenu--visible { max-height: 600px; }
   }
 }
 
@@ -253,10 +273,10 @@
   .logo { max-width: 195px; overflow: hidden; font-size: 13px; letter-spacing: 1.5px; text-overflow: ellipsis; }
   .icons { right: 14px; gap: 12px; font-size: 18px; }
   .navbar-menu { top: 64px; }
-  .navbar-menu.open { max-height: calc(100dvh - 64px); overflow-y: auto; }
-  .navbar-menu a { padding: 16px 20px; font-size: 13px; }
+  .navbar-menu.open { max-height: min(70dvh, 540px); overflow-y: auto; }
+  .navbar-menu a, .navbar-menu .menu-category { padding: 16px 20px; font-size: 13px; }
 }
 
 @media (min-width: 481px) and (max-width: 900px) {
-  .navbar-menu.open { max-height: calc(100dvh - 82px); overflow-y: auto; }
+  .navbar-menu.open { max-height: min(70dvh, 540px); overflow-y: auto; }
 }

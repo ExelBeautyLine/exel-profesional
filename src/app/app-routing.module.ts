@@ -10,6 +10,7 @@ import { PanelComponent } from './admin/panel/panel.component';
 import { adminGuard } from './admin/admin.guard';
 import { PromocionesComponent } from './admin/promociones/promociones.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { InformacionComponent } from './informacion/informacion.component';
 
 const routes: Routes = [
     {
@@ -27,6 +28,10 @@ const routes: Routes = [
     {
     path: 'productos/:slug',
     component: ProductoDetalleComponent
+    },
+    {
+    path: 'informacion/:seccion',
+    component: InformacionComponent
     },
     {
     path: 'carrito',

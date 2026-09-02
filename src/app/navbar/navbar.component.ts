@@ -29,6 +29,27 @@ export class NavbarComponent implements OnInit {
 
   menuOpen = false;
 
+  alternarMenu(): void {
+    this.menuOpen = !this.menuOpen;
+
+    if (!this.menuOpen) {
+      this.cerrarSubmenus();
+    }
+  }
+
+  alternarCategoria(categoria: any): void {
+    categoria.open = !categoria.open;
+  }
+
+  cerrarMenu(): void {
+    this.menuOpen = false;
+    this.cerrarSubmenus();
+  }
+
+  private cerrarSubmenus(): void {
+    this.menu.forEach((categoria) => categoria.open = false);
+  }
+
   get cantidadCarrito(): number {
 
     return this.carritoService.cantidadItems();

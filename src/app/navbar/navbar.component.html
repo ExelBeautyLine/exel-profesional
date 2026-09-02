@@ -2,7 +2,13 @@
 
   <div class="navbar-top">
 
-    <button class="hamburger" (click)="menuOpen = !menuOpen">
+    <button
+      type="button"
+      class="hamburger"
+      [attr.aria-expanded]="menuOpen"
+      aria-label="Abrir menú"
+      (click)="alternarMenu()"
+    >
       ☰
     </button>
 
@@ -11,8 +17,8 @@
     </div>
 
     <div class="icons">
-      <i class="fa-regular fa-user"></i>
-      <a routerLink="/carrito" class="carrito-navbar">
+      
+      <a routerLink="/carrito" class="carrito-navbar" (click)="cerrarMenu()">
 
         <i class="fa-solid fa-shopping-cart"></i>
 
@@ -27,23 +33,30 @@
 
   </div>
 
-  <nav class="navbar-menu" [class.open]="menuOpen">
+  <nav class="navbar-menu" [class.open]="menuOpen" [attr.aria-hidden]="!menuOpen">
 
     <ul>
 
       <li>
-        <a [routerLink]="['/productos']">Inicio</a>
+        <a [routerLink]="['/']" (click)="cerrarMenu()">Inicio</a>
       </li>
 
 
       <li *ngFor="let categoria of menu" (mouseenter)="categoria.open = true" (mouseleave)="categoria.open = false">
 
-        <a>{{ categoria.nombre }}</a>
+        <button
+          type="button"
+          class="menu-category"
+          [attr.aria-expanded]="categoria.open"
+          (click)="alternarCategoria(categoria)"
+        >
+          {{ categoria.nombre }}
+        </button>
 
         <ul class="submenu" [class.submenu--visible]="categoria.open" *ngIf="categoria.subcategorias?.length">
 
           <li *ngFor="let sub of categoria.subcategorias">
-            <a [routerLink]="['/productos/subcategoria', sub.slug]">
+            <a [routerLink]="['/productos/subcategoria', sub.slug]" (click)="cerrarMenu()">
               {{ sub.nombre }}
             </a>
           </li>
@@ -52,7 +65,7 @@
       </li>
 
       <li>
-        <a [routerLink]="['/productos']">Mas Vendidos</a>
+        <a [routerLink]="['/productos']" (click)="cerrarMenu()">Mas Vendidos</a>
       </li>
 
     </ul>

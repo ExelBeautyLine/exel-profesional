@@ -1,0 +1,69 @@
+<main class="informacion">
+  <nav class="breadcrumb" aria-label="Navegación secundaria">
+    <a routerLink="/">Inicio</a><span>/</span><span>Información</span>
+  </nav>
+
+  <section *ngIf="seccion === 'quienes-somos'" class="informacion-contenido">
+    <p class="eyebrow">Exel Professional Line</p>
+    <h1>Quiénes somos</h1>
+    <p class="introduccion">Distribuidores oficiales de Exel Professional Line.</p>
+    <p>En Exel Professional Line creemos que el cuidado de la piel va mucho más allá de una rutina: es una experiencia de bienestar, confianza y transformación personal.</p>
+    <p>Nacimos con el propósito de acercar productos profesionales de alta calidad a quienes buscan potenciar su belleza natural con innovación, respaldo y excelencia.</p>
+    <p>Trabajamos para ser un espacio de referencia en estética y skincare profesional, con una selección cuidadosamente elegida que combina ciencia, tecnología y cuidado consciente.</p>
+
+    <h2>Nuestra esencia</h2>
+    <p>Acompañamos a cada persona y profesional en su camino de cuidado personal, con asesoramiento y productos que elevan la experiencia de belleza.</p>
+    <ul>
+      <li>La belleza auténtica y real.</li>
+      <li>La calidad profesional como estándar.</li>
+      <li>La innovación constante en estética y skincare.</li>
+      <li>La atención cercana y personalizada.</li>
+      <li>El compromiso con el bienestar y la confianza de cada cliente.</li>
+    </ul>
+
+    <h2>Más que productos, una experiencia</h2>
+    <p>Cada detalle está pensado para transmitir profesionalismo, inspiración y excelencia. Buscamos crear una comunidad donde la belleza se viva de forma consciente, moderna y accesible.</p>
+    <h2>Nuestra misión</h2>
+    <p>Inspirar confianza a través del cuidado personal, ofreciendo productos profesionales y una experiencia de compra que combine calidad, asesoramiento y cercanía.</p>
+    <h2>Nuestra visión</h2>
+    <p>Ser una marca referente en estética profesional y skincare, reconocida por su excelencia, innovación y compromiso con cada persona que elige cuidarse.</p>
+  </section>
+
+  <section *ngIf="seccion === 'como-comprar'" class="informacion-contenido">
+    <p class="eyebrow">Guía de compra</p>
+    <h1>Cómo comprar</h1>
+    <p class="introduccion">Comprar en Exel Professional Line es rápido, simple y 100% online. Podés hacer tu pedido desde tu celular, tablet o computadora y recibirlo cómodamente en tu domicilio.</p>
+
+    <ol class="pasos-compra">
+      <li><h2>Elegí tus productos favoritos</h2><p>Explorá la tienda y agregá al carrito todos los productos que quieras. Podés comprar varios productos en un mismo pedido y aprovechar los beneficios de envío.</p></li>
+      <li><h2>Ingresá al carrito</h2><p>Cuando tengas todo listo, hacé clic en “Iniciar compra” para continuar con el proceso.</p></li>
+      <li><h2>Completá tus datos</h2><p>Ingresá tu información de contacto y dirección de envío. Verificá que tu correo electrónico esté correctamente escrito para recibir las actualizaciones de tu compra.</p></li>
+      <li><h2>Seleccioná el método de envío</h2><p>Realizamos envíos con Andreani a todo el país, a domicilio o a la sucursal que te resulte más cómoda.</p></li>
+      <li><h2>Elegí cómo pagar</h2><p>Podés abonar con tarjeta de crédito, débito o transferencia bancaria de forma simple y segura.</p></li>
+      <li><h2>Seguimiento de tu pedido</h2><p>Una vez confirmada la compra, recibirás un correo con la información y el seguimiento de tu envío.</p></li>
+    </ol>
+  </section>
+
+  <section *ngIf="seccion === 'cambios-y-devoluciones'" class="informacion-contenido">
+    <p class="eyebrow">Información importante</p>
+    <h1>Política de cambios y devoluciones</h1>
+    <p class="introduccion">Queremos que tengas la mejor experiencia en cada compra. Por eso contamos con un proceso simple, claro y transparente para ayudarte.</p>
+
+    <h2>Solicitudes de devolución</h2>
+    <p>Podés solicitar un cambio o devolución dentro de los 10 días hábiles posteriores a la recepción de tu pedido. Para que la solicitud sea aprobada, los productos deben estar sin uso, en perfectas condiciones, con su packaging original y todos los elementos entregados.</p>
+    <p>Por higiene y seguridad, los productos cosméticos o de cuidado personal que hayan sido abiertos, utilizados o manipulados no podrán ser devueltos.</p>
+
+    <h2>¿Cómo solicitar un cambio o devolución?</h2>
+    <ol class="pasos-compra">
+      <li><h2>Contactanos</h2><p>Escribinos a <a href="mailto:exelprofessionalline1@gmail.com">exelprofessionalline1&#64;gmail.com</a> con el número de pedido, el motivo de la solicitud y fotos claras del producto y su estado.</p></li>
+      <li><h2>Revisión de la solicitud</h2><p>Nuestro equipo analizará el caso y responderá dentro de las 48 horas hábiles con los pasos a seguir.</p></li>
+      <li><h2>Envío del producto</h2><p>Una vez aprobada la solicitud, te indicaremos cómo realizar el envío. Los costos están a cargo del cliente, salvo que el producto tenga fallas o no coincida con la compra.</p></li>
+      <li><h2>Cambio o reintegro</h2><p>Cuando recibamos el producto y confirmemos que cumple las condiciones, podrás optar por el reintegro a través del mismo medio de pago o por el cambio por otro producto.</p></li>
+    </ol>
+
+    <h2>Productos con fallas o errores en el envío</h2>
+    <p>Si recibiste un producto dañado, defectuoso o incorrecto, comunicate con nosotros dentro de las primeras 48 horas. En esos casos, Exel Professional Line se hará cargo de los costos de envío y reposición.</p>
+    <h2>Información importante</h2>
+    <p>Los productos en promoción, ofertas especiales o liquidación no tienen cambio ni devolución, salvo por fallas de fábrica. No se aceptarán solicitudes fuera de los plazos indicados.</p>
+  </section>
+</main>
