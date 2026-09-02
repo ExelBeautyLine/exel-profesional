@@ -26,6 +26,10 @@ const routes: Routes = [
     component: ProductosListaComponent
     },
     {
+    path: 'productos/categoria/:slug',
+    component: ProductosListaComponent
+    },
+    {
     path: 'productos/:slug',
     component: ProductoDetalleComponent
     },

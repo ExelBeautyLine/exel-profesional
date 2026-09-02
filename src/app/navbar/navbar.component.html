@@ -44,14 +44,12 @@
 
       <li *ngFor="let categoria of menu" (mouseenter)="categoria.open = true" (mouseleave)="categoria.open = false">
 
-        <button
-          type="button"
-          class="menu-category"
-          [attr.aria-expanded]="categoria.open"
-          (click)="alternarCategoria(categoria)"
+        <a
+          [routerLink]="['/productos/categoria', categoria.slug]"
+          (click)="abrirCategoria(categoria)"
         >
           {{ categoria.nombre }}
-        </button>
+        </a>
 
         <ul class="submenu" [class.submenu--visible]="categoria.open" *ngIf="categoria.subcategorias?.length">
 

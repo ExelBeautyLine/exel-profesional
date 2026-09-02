@@ -12,7 +12,6 @@
 
 .footer-envio,
 .footer-comunidad,
-.footer-newsletter,
 .footer-contenido,
 .footer-inferior {
   max-width: 1320px;
@@ -57,7 +56,6 @@
 }
 
 .footer-comunidad h2,
-.footer-newsletter h2,
 .footer-columna h2 {
   margin: 0;
   font-weight: 600;
@@ -65,53 +63,6 @@
 
 .footer-comunidad h2 { max-width: 360px; font-size: clamp(21px, 2vw, 27px); line-height: 1.2; }
 .footer-comunidad > p { max-width: 620px; margin: 0; align-self: center; color: #c6c8c3; font-size: 15px; line-height: 1.7; }
-
-.footer-newsletter {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) minmax(350px, .95fr);
-  gap: 55px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background: linear-gradient(90deg, #141b10, #0e100d 70%);
-}
-
-.footer-newsletter h2 { margin-bottom: 8px; font-size: 23px; line-height: 1.2; }
-.footer-newsletter > div > p:last-child { margin: 0; color: #d6d9d2; font-size: 14px; }
-.footer-newsletter strong { color: var(--footer-verde); }
-
-.newsletter-form { display: grid; align-content: center; gap: 8px; }
-.newsletter-form label { color: #d6d9d2; font-size: 12px; font-weight: 700; }
-.newsletter-campos { display: flex; gap: 8px; }
-.newsletter-campos input {
-  min-width: 0;
-  flex: 1;
-  height: 44px;
-  padding: 0 13px;
-  border: 1px solid #6d7464;
-  border-radius: 4px;
-  outline: 0;
-  background: #fff;
-  color: #1d211c;
-  font: inherit;
-  font-size: 13px;
-}
-.newsletter-campos input:focus { border-color: var(--footer-verde); box-shadow: 0 0 0 3px rgba(168, 196, 100, .2); }
-.newsletter-campos button {
-  min-width: 162px;
-  padding: 0 15px;
-  border: 1px solid var(--footer-verde);
-  border-radius: 4px;
-  background: var(--footer-verde);
-  color: #17200d;
-  cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 800;
-  transition: background .2s, border-color .2s, transform .2s;
-}
-.newsletter-campos button:hover { border-color: #c7dc93; background: #c7dc93; transform: translateY(-1px); }
-.newsletter-form small { min-height: 16px; color: #abb0a4; font-size: 11px; }
-.newsletter-form small.newsletter-confirmacion { color: #c7dc93; }
 
 .footer-contenido {
   display: grid;
@@ -175,21 +126,16 @@
 .whatsapp-flotante:focus-visible { outline: 3px solid #a8c464; outline-offset: 3px; }
 
 @media (max-width: 800px) {
-  .footer-comunidad, .footer-newsletter { grid-template-columns: 1fr; gap: 22px; }
-  .footer-newsletter { background: linear-gradient(180deg, #141b10, #0e100d); }
+  .footer-comunidad { grid-template-columns: 1fr; gap: 22px; }
   .footer-contenido { grid-template-columns: 1.1fr 1fr; gap: 36px 28px; }
   .footer-marca { grid-column: 1 / -1; }
 }
 
 @media (max-width: 560px) {
-  .footer-envio, .footer-comunidad, .footer-newsletter, .footer-contenido, .footer-inferior { padding-right: 20px; padding-left: 20px; }
+  .footer-envio, .footer-comunidad, .footer-contenido, .footer-inferior { padding-right: 20px; padding-left: 20px; }
   .footer-envio { min-height: 50px; font-size: 11px; }
   .footer-comunidad { padding-top: 32px; padding-bottom: 32px; }
   .footer-comunidad > p { font-size: 13px; }
-  .footer-newsletter { padding-top: 31px; padding-bottom: 31px; }
-  .footer-newsletter h2 { font-size: 20px; }
-  .newsletter-campos { flex-direction: column; }
-  .newsletter-campos button { min-height: 44px; }
   .footer-contenido { grid-template-columns: 1fr; padding-top: 38px; padding-bottom: 36px; }
   .footer-marca { grid-column: auto; }
   .footer-inferior { flex-direction: column; gap: 7px; }

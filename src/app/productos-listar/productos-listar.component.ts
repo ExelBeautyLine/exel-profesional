@@ -29,17 +29,22 @@ export class ProductosListaComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
 
       const slug = params.get('slug');
+      const esCategoria =
+        this.route.snapshot.routeConfig?.path ===
+        'productos/categoria/:slug';
 
       console.log("SLUG:", slug);
 
 
       if (slug) {
 
-        this.productosDataService
-          .listarPorSubcategoria(slug)
-          .subscribe(productos => {
-            this.productos = productos;
-          });
+        const productos$ = esCategoria
+          ? this.productosDataService.listarPorCategoria(slug)
+          : this.productosDataService.listarPorSubcategoria(slug);
+
+        productos$.subscribe(productos => {
+          this.productos = productos;
+        });
 
       } else {
 

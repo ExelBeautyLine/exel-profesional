@@ -79,8 +79,7 @@
     position: relative;
   }
 
-  a,
-  .menu-category {
+  a {
     color: inherit;
     text-decoration: none;
     color: white;
@@ -93,12 +92,6 @@
     &:hover { color: #d9c48f; }
   }
 
-  .menu-category {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    font-family: inherit;
-  }
 }
 
 .submenu {
@@ -236,8 +229,7 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    a,
-    .menu-category {
+    a {
       display: block;
       width: 100%;
       padding: 18px 22px;
@@ -274,7 +266,7 @@
   .icons { right: 14px; gap: 12px; font-size: 18px; }
   .navbar-menu { top: 64px; }
   .navbar-menu.open { max-height: min(70dvh, 540px); overflow-y: auto; }
-  .navbar-menu a, .navbar-menu .menu-category { padding: 16px 20px; font-size: 13px; }
+  .navbar-menu a { padding: 16px 20px; font-size: 13px; }
 }
 
 @media (min-width: 481px) and (max-width: 900px) {

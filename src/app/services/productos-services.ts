@@ -32,6 +32,12 @@ export class ProductosService {
 
   }
 
+  listarPorCategoria(slug: string) {
+    return this.http.get<Producto[]>(
+      '/.netlify/functions/listar-productos-categoria?slug=' + slug
+    );
+  }
+
   obtenerProducto(slug: string) {
     return this.http.get<Producto>(
       '/.netlify/functions/producto?slug=' + slug

@@ -37,8 +37,10 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  alternarCategoria(categoria: any): void {
-    categoria.open = !categoria.open;
+  abrirCategoria(categoria: any): void {
+    this.cerrarSubmenus();
+    categoria.open = true;
+    this.menuOpen = true;
   }
 
   cerrarMenu(): void {
