@@ -83,7 +83,7 @@ export class ProductoDetalleComponent implements OnInit {
 
   get cuotaPrincipal(): Cuota | null {
     const cuotas = this.producto?.precio?.cuotas ?? [];
-    return cuotas[2] ?? cuotas[cuotas.length - 1] ?? null;
+    return cuotas.find(cuota => cuota.cantidad === 3) ?? null;
   }
 
   get etiquetaTipo(): string {

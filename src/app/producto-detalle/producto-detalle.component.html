@@ -24,8 +24,8 @@
         <span *ngIf="producto.precio.descuento > 0" class="descuento">{{ producto.precio.descuento }}% OFF</span>
       </div>
 
-      <p class="transferencia"><strong>{{ producto.precio.transferencia | currency:'ARS':'symbol':'1.2-2' }}</strong> con transferencia</p>
       <p class="cuotas" *ngIf="cuotaPrincipal as cuota">Hasta <strong>{{ cuota.cantidad }} cuotas sin interés</strong> de {{ cuota.valorCuota | currency:'ARS':'symbol':'1.2-2' }}</p>
+      <p class="cuotas descuento-transferencia"><strong>15% de descuento</strong> <span> pagando con Transferencia</span></p>
 
       <div class="disponibilidad" [class.sin-stock]="producto.stock <= 0">
         <span class="estado-stock"></span>{{ producto.stock > 0 ? 'Stock disponible' : 'Sin stock' }}
