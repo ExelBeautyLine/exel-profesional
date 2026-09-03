@@ -43,20 +43,20 @@ export async function crearPreferencia(
             back_urls: {
 
                 success:
-                    "https://exelprofessional.netlify.app/gracias",
+                    "https://www.exelprofessionalline.com/gracias",
 
                 failure:
-                    "https://exelprofessional.netlify.app/gracias",
+                    "https://www.exelprofessionalline.com/gracias",
 
                 pending:
-                    "https://exelprofessional.netlify.app/gracias"
+                    "https://www.exelprofessionalline.com/gracias"
 
             },
 
             auto_return: "approved",
 
             notification_url:
-                "https://exelprofessional.netlify.app/.netlify/functions/webhook"
+                "https://www.exelprofessionalline.com/.netlify/functions/webhook"
 
         }
 

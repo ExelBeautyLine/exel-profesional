@@ -1,25 +1,92 @@
 import { Handler } from "@netlify/functions";
-import { Payment } from "mercadopago";
+import {
+    Payment,
+    WebhookSignatureValidator,
+    InvalidWebhookSignatureError
+} from "mercadopago";
 import { mercadoPago } from "./lib/mercadopago-manager";
 import { pool } from "./lib/db";
 
 export const handler: Handler = async (event) => {
 
-    console.log("Webhook recibido");
-    console.log("Body:", event.body);
-
     try {
+
+        const secret = process.env["MERCADO_PAGO_WEBHOOK_SECRET"];
+
+        if (!secret) {
+
+            console.error(
+                "Falta MERCADO_PAGO_WEBHOOK_SECRET en las variables de entorno."
+            );
+
+            return {
+                statusCode: 500,
+                body: "Configuración incompleta"
+            };
+
+        }
+
+        const xSignature =
+            event.headers["x-signature"] ??
+            event.headers["X-Signature"];
+
+        const xRequestId =
+            event.headers["x-request-id"] ??
+            event.headers["X-Request-Id"];
+
+        const dataId =
+            event.queryStringParameters?.["data.id"];
+
+        if (!xSignature || !xRequestId || !dataId) {
+
+            console.error("Faltan datos para validar el webhook.");
+
+            return {
+                statusCode: 401,
+                body: "Unauthorized"
+            };
+
+        }
+
+        try {
+
+            WebhookSignatureValidator.validate({
+                xSignature,
+                xRequestId,
+                dataId,
+                secret
+            });
+
+        } catch (error) {
+
+            if (error instanceof InvalidWebhookSignatureError) {
+
+                console.error("Firma de webhook inválida.");
+
+                return {
+                    statusCode: 401,
+                    body: "Unauthorized"
+                };
+
+            }
+
+            throw error;
+
+        }
+
+        console.log("Webhook de Mercado Pago validado correctamente.");
 
         const body = JSON.parse(event.body ?? "{}");
 
         const paymentId =
+            dataId ??
             body?.data?.id ??
             body?.id ??
             body?.resource;
 
         if (!paymentId) {
 
-            console.log("No se recibió payment_id");
+            console.log("No se recibió payment_id.");
 
             return {
                 statusCode: 200,
@@ -46,7 +113,9 @@ export const handler: Handler = async (event) => {
 
         if (!pedidoId) {
 
-            console.log("El pago no tiene external_reference");
+            console.log(
+                "El pago no tiene external_reference."
+            );
 
             return {
                 statusCode: 200,
@@ -75,10 +144,12 @@ export const handler: Handler = async (event) => {
                 break;
 
             default:
+
                 console.log(
                     "Estado de Mercado Pago no manejado:",
                     payment.status
                 );
+
                 break;
         }
 
@@ -106,23 +177,20 @@ export const handler: Handler = async (event) => {
         }
 
         return {
-
             statusCode: 200,
-
             body: "OK"
-
         };
 
     } catch (error) {
 
-        console.error("Error procesando webhook:", error);
+        console.error(
+            "Error procesando webhook:",
+            error
+        );
 
         return {
-
             statusCode: 500,
-
             body: "Error"
-
         };
 
     }
