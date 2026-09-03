@@ -34,6 +34,10 @@ const ordenSubcategorias: Record<string, string[]> = {
     'cremas lociones y ceras',
     'mascaras capilares',
     'solidos'
+  ],
+   rutinas: [
+    'piel sensible',
+    'piel grasa' 
   ]
 };
 

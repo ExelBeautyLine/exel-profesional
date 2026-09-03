@@ -30,9 +30,20 @@
   to = "/index.html"
   status = 200
 
-# Fallback de Angular SPA: permite abrir o refrescar cualquier ruta del sitio
-# (por ejemplo /admin) sin que Netlify devuelva un 404.
+# Rutas SPA que deben resolverse a Angular al abrirlas o refrescarlas.
+# Se declaran de forma específica para no interceptar archivos estáticos
+# como /assets/* cuando se ejecuta Netlify Dev.
 [[redirects]]
-  from = "/*"
+  from = "/admin"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/informacion/*"
   to = "/index.html"
   status = 200
