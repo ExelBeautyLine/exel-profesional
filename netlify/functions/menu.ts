@@ -37,7 +37,13 @@ const ordenSubcategorias: Record<string, string[]> = {
   ],
    rutinas: [
     'piel sensible',
-    'piel grasa' 
+    'piel grasa',
+    'piel mixta',
+    'piel normal',
+    'piel seca',
+    'piel madura / antiage',
+    'piel con hiperpigmentacion'
+
   ]
 };
 
