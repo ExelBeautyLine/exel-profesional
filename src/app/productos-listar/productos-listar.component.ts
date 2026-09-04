@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { Producto } from './Producto';
 import { ProductosService } from '../services/productos-services';
 import { CarritoService } from '../carrito/carrito.service';
@@ -15,6 +16,7 @@ import { NotificacionesService } from '../notificaciones/notificaciones.service'
 export class ProductosListaComponent implements OnInit {
 
   productos: Producto[] = [];
+  busqueda = '';
 
   hoverProducto: number | null = null;
 
@@ -28,14 +30,21 @@ export class ProductosListaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params => {
+    combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(([params, queryParams]) => {
 
       const slug = params.get('slug');
+      this.busqueda = queryParams.get('buscar')?.trim() ?? '';
       const esCategoria =
         this.route.snapshot.routeConfig?.path ===
         'productos/categoria/:slug';
 
-      console.log("SLUG:", slug);
+      if (this.busqueda) {
+        this.productosDataService
+          .buscarPorNombre(this.busqueda)
+          .subscribe(productos => this.productos = productos);
+
+        return;
+      }
 
 
       if (slug) {
@@ -44,17 +53,13 @@ export class ProductosListaComponent implements OnInit {
           ? this.productosDataService.listarPorCategoria(slug)
           : this.productosDataService.listarPorSubcategoria(slug);
 
-        productos$.subscribe(productos => {
-          this.productos = productos;
-        });
+        productos$.subscribe(productos => this.productos = productos);
 
       } else {
 
         this.productosDataService
           .listar()
-          .subscribe(productos => {
-            this.productos = productos;
-          });
+          .subscribe(productos => this.productos = productos);
 
       }
 

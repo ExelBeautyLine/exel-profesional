@@ -16,6 +16,21 @@
       EXEL PROFESSIONAL LINE
     </div>
 
+    <form class="navbar-search" (ngSubmit)="buscarProductos()" role="search">
+      <label class="sr-only" for="busqueda-navbar">Buscar productos</label>
+      <input
+        id="busqueda-navbar"
+        name="busqueda"
+        type="search"
+        [(ngModel)]="busqueda"
+        placeholder="Buscar productos"
+        autocomplete="off"
+      />
+      <button type="submit" aria-label="Buscar productos">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      </button>
+    </form>
+
     <div class="icons">
       
       <a routerLink="/carrito" class="carrito-navbar" (click)="cerrarMenu()">

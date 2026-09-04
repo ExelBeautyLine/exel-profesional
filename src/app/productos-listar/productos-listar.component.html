@@ -1,6 +1,10 @@
 <section class="shop-page">
 
   <div class="shop-toolbar">
+    <div class="resultado-busqueda" *ngIf="busqueda">
+      <p>Resultados para <strong>“{{ busqueda }}”</strong></p>
+      <span>{{ productos.length }} {{ productos.length === 1 ? 'producto encontrado' : 'productos encontrados' }}</span>
+    </div>
     <div class="toolbar-line"></div>
 
    
@@ -79,6 +83,10 @@
       </article>
 
     </div>
+
+    <p class="sin-resultados" *ngIf="busqueda && productos.length === 0">
+      No encontramos productos con ese nombre. Probá con otra búsqueda.
+    </p>
 
   </section>
 

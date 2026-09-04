@@ -9,6 +9,26 @@
 .shop-toolbar { margin-bottom: 30px; }
 .toolbar-line { height: 1px; background: #e7e7e7; }
 
+.resultado-busqueda {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 15px;
+
+  p, span { margin: 0; }
+  p { color: #222; font-size: 16px; }
+  strong { font-weight: 600; }
+  span { color: #777; font-size: 13px; }
+}
+
+.sin-resultados {
+  margin: 48px 0;
+  color: #666;
+  text-align: center;
+  font-size: 16px;
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -145,6 +165,8 @@
 @media (max-width: 600px) {
   .shop-page { padding: 26px 12px 48px; }
   .shop-toolbar { margin-bottom: 20px; }
+  .resultado-busqueda { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .resultado-busqueda p { font-size: 14px; }
   .producto-info { padding: 10px; }
   .producto-info h3 { min-height: 34px; font-size: 11px; }
   .precio-anterior { font-size: 10px; }

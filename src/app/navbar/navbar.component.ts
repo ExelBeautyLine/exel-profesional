@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavbarService } from '../services/menu-service';
 import { CarritoService} from '../carrito/carrito.service';
 
@@ -15,8 +16,13 @@ export class NavbarComponent implements OnInit {
 
 
   menu: any[] = [];
+  busqueda = '';
 
-  constructor(private navbarService: NavbarService, private carritoService: CarritoService) {}
+  constructor(
+    private navbarService: NavbarService,
+    private carritoService: CarritoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
 
@@ -55,6 +61,16 @@ export class NavbarComponent implements OnInit {
   cerrarMenu(): void {
     this.menuOpen = false;
     this.cerrarSubmenus();
+  }
+
+  buscarProductos(): void {
+    const busqueda = this.busqueda.trim();
+
+    this.router.navigate(['/productos'], {
+      queryParams: busqueda ? { buscar: busqueda } : {}
+    });
+
+    this.cerrarMenu();
   }
 
   private cerrarSubmenus(): void {
