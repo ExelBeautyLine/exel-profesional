@@ -98,8 +98,8 @@
   position: absolute;
   left: 40px;
   display: flex;
-  width: min(270px, 24vw);
-  height: 40px;
+  width: min(330px, 24vw);
+  height: 50px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 999px;
@@ -119,9 +119,9 @@
     outline: 0;
     background: transparent;
     color: #fff;
-    padding: 0 0 0 16px;
+    padding: 0 0 0 18px;
     font: inherit;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: .4px;
 
     &::placeholder { color: rgba(255, 255, 255, .62); }
@@ -140,12 +140,13 @@
   }
 
   button {
-    width: 42px;
-    flex: 0 0 42px;
+    width: 50px;
+    flex: 0 0 50px;
     border: 0;
     background: transparent;
     color: #fff;
     cursor: pointer;
+    font-size: 15px;
     transition: color .2s ease, background .2s ease;
 
     &:hover { color: #d9c48f; background: rgba(255, 255, 255, .08); }
@@ -284,6 +285,12 @@
     left: 20px;
     width: calc(100% - 40px);
     height: 42px;
+
+    button {
+      width: 42px;
+      flex-basis: 42px;
+      font-size: 14px;
+    }
   }
 
   .navbar-menu {
@@ -348,7 +355,18 @@
   .hamburger { top: 15px; left: 12px; padding: 8px; font-size: 25px; line-height: 1; }
   .logo { top: 23px; max-width: 195px; overflow: hidden; font-size: 13px; letter-spacing: 1.5px; text-overflow: ellipsis; }
   .icons { top: 23px; right: 14px; gap: 12px; font-size: 18px; }
-  .navbar-search { top: 64px; left: 12px; width: calc(100% - 24px); height: 35px; }
+  .navbar-search {
+    top: 64px;
+    left: 12px;
+    width: calc(100% - 24px);
+    height: 35px;
+
+    button {
+      width: 38px;
+      flex-basis: 38px;
+      font-size: 13px;
+    }
+  }
   .navbar-menu { top: 112px; }
   .navbar-menu.open { max-height: min(70dvh, 540px); overflow-y: auto; }
   .navbar-menu a { padding: 16px 20px; font-size: 13px; }
