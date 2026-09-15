@@ -155,9 +155,14 @@ export async function calcularResumen(
 
     );
 
-    const totalTarjeta = subtotalTarjeta + costoEnvio;
+    const costoEnvioAplicado =
+        subtotalTransferencia >= 120000
+            ? 0
+            : costoEnvio;
 
-    const totalTransferencia = subtotalTransferencia + costoEnvio;
+    const totalTarjeta = subtotalTarjeta + costoEnvioAplicado;
+
+    const totalTransferencia = subtotalTransferencia + costoEnvioAplicado;
 
     return {
 
@@ -169,7 +174,7 @@ export async function calcularResumen(
 
         cantidadItems,
 
-        costoEnvio,
+        costoEnvio: costoEnvioAplicado,
 
         totalTarjeta,
 
