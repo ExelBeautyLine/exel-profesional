@@ -146,6 +146,11 @@ export class InicioComponent implements OnInit {
 
     this.carritoService.agregarProducto(producto.id, 1);
 
+    this.notificaciones.mostrar(
+      'Producto agregado al carrito.',
+      'exito'
+    );
+
     this.carritoApiService
       .obtenerCarrito()
       .subscribe({
