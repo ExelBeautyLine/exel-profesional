@@ -521,7 +521,7 @@ export async function crearPedido(
 
             whatsapp:
 
-                `https://wa.me/5492262616955?text=${mensajeWhatsapp}`,
+                `https://wa.me/542235353342?text=${mensajeWhatsapp}`,
             
             mercadoPago:
 
